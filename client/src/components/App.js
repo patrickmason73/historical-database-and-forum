@@ -1,8 +1,8 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import Navbar from "./Navbar"
 import Header from "./Header";
 import {Routes, Route } from 'react-router-dom';
-import { useEffect, useState } from "react";
+
 
 function App() {
   const [currentUser, setCurrentUser] = useState(null)
