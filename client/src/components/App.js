@@ -13,13 +13,17 @@ function App() {
   useEffect(() => {
     fetch("/me").then((res) => {
       if (res.ok) {
-        res.json().then((user) => setCurrentUser(user))
+        res.json().then((user) => {setCurrentUser(user)
+        console.log(user)})
       }
     })
   }, [])
 
+  // const {id, username, displayName, bio, imgURL} = currentUser
+
   return (
     <div className="App">
+       {/* {currentUser != null && `Welcome ${displayName}`}  */}
       <Navbar />
      <Routes>
       <Route path="/*" element={
