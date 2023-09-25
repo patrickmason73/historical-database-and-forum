@@ -5,10 +5,11 @@ import App from './components/App';
 import {BrowserRouter as Router} from 'react-router-dom';
 // import reportWebVitals from './reportWebVitals';
 
-ReactDOM.createRoot(document.getElementById('root')).render(
+ReactDOM.render(
   <Router>
     <App />
-  </Router>
+  </Router>,
+  document.getElementById('root')
 );
 
 // If you want to start measuring performance in your app, pass a function
