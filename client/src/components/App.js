@@ -33,7 +33,7 @@ function App() {
       }>
       </Route>
 
-      <Route path="/login" element={<Login setCurrentUser={setCurrentUser}/>}>
+      <Route path="/login" element={ loggingIn == true && <Login setCurrentUser={setCurrentUser} setLoggingIn={setLoggingIn} /> }>
       </Route>
 
       <Route path="/signup" element={<Signup setCurrentUser={setCurrentUser}/>}>

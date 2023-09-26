@@ -3,7 +3,9 @@ import React, { useState } from "react";
 
 
 
-function Login({ setCurrentUser }) {
+function Login({ setCurrentUser, setLoggingIn }) {
+setLoggingIn(true);
+
     const [username, setUsername] = useState("");
     const [password, setPassword] = useState("");
     const [errors, setErrors] = useState([]);
@@ -19,7 +21,10 @@ function Login({ setCurrentUser }) {
         body: JSON.stringify({ username, password }),
       }).then((r) => {
         if (r.ok) {
-          r.json().then((user) => setCurrentUser(user));
+          r.json().then((user) => {
+            setCurrentUser(user)
+            setLoggingIn(false)
+          });
         } else {
           r.json().then((err) => setErrors(err.errors));
         }
@@ -49,9 +54,9 @@ function Login({ setCurrentUser }) {
             </label>
             <br />
             <button type="submit">Login</button>
-            <p>{errors.map((err) => (
+            <p>{ errors.length > 0 ? errors.map((err) => (
                 <p key={err}>{err}</p>
-            ))}</p>
+            )) : null }</p>
         </form>
     )
 
