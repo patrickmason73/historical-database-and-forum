@@ -3,6 +3,7 @@ import Navbar from "./Navbar"
 import Header from "./Header";
 import Login from "./Login";
 import Signup from "./Signup";
+import Posts from "./Posts";
 import {Routes, Route } from 'react-router-dom';
 
 
@@ -24,7 +25,7 @@ function App() {
   return (
     <div className="App">
        {/* {currentUser != null && `Welcome ${displayName}`}  */}
-      <Navbar />
+      <Navbar setCurrentUser={setCurrentUser} currentUser={currentUser}/>
      <Routes>
       <Route path="/*" element={
         <>
@@ -37,6 +38,9 @@ function App() {
       </Route>
 
       <Route path="/signup" element={<Signup setCurrentUser={setCurrentUser}/>}>
+      </Route>
+
+      <Route path="/posts/index" element={<Posts />}>
       </Route>
 
      </Routes>

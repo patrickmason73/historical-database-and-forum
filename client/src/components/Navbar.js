@@ -18,14 +18,27 @@ const linkStyles = {
     justifyContent: "center",
   }
 
-function Navbar() {
+function Navbar({ setCurrentUser, currentUser }) {
+
+  function logout() {
+    fetch("/logout", {
+      method: "DELETE",
+    }).then((res) => {
+      if (res.ok) {
+        setCurrentUser(null)
+        console.log(res)
+      }
+    })
+  }
+
+
     return (
         <div >
             <nav style={navStyle}>
                 <NavLink to="/"
                
                 style={linkStyles}
-               
+                
                 >
                  Home
                 </NavLink>
@@ -53,6 +66,10 @@ function Navbar() {
               >
                 Posts
               </NavLink>
+
+                <NavLink to="/logout" onClick={logout}>
+                Log Out
+                </NavLink>
                 </nav>
         </div>
     )

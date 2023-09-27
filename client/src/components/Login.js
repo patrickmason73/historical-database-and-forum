@@ -22,6 +22,7 @@ function Login({ setCurrentUser, currentUser }) {
         if (r.ok) {
           r.json().then((user) => {
             setCurrentUser(user)
+            console.log(user)
           });
         } else {
           r.json().then((err) => setErrors(err.errors));
