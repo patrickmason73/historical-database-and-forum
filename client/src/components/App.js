@@ -13,9 +13,10 @@ function App() {
   useEffect(() => {
     fetch("/me").then((res) => {
       if (res.ok) {
-        res.json().then((user) => {setCurrentUser(user)
-        console.log(user)})
-      }
+        res.json().then((user) => {
+        setCurrentUser(user)
+        console.log(user)
+      })}
     })
   }, [])
 
@@ -33,7 +34,7 @@ function App() {
       }>
       </Route>
 
-      <Route path="/login" element={ loggingIn == true && <Login setCurrentUser={setCurrentUser} setLoggingIn={setLoggingIn} /> }>
+      <Route path="/login" element={ <Login setCurrentUser={setCurrentUser} setLoggingIn={setLoggingIn} loggingIn={loggingIn} /> }>
       </Route>
 
       <Route path="/signup" element={<Signup setCurrentUser={setCurrentUser}/>}>

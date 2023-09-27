@@ -3,7 +3,7 @@ import React, { useState } from "react";
 
 
 
-function Login({ setCurrentUser, setLoggingIn }) {
+function Login({ setCurrentUser, setLoggingIn, loggingIn }) {
 setLoggingIn(true);
 
     const [username, setUsername] = useState("");
@@ -32,6 +32,8 @@ setLoggingIn(true);
     }
 
     return (
+      <>
+      { loggingIn ?
         <form onSubmit={handleSubmit}>
             <label> 
                 Username
@@ -53,11 +55,14 @@ setLoggingIn(true);
                 />
             </label>
             <br />
+            
             <button type="submit">Login</button>
             <p>{ errors.length > 0 ? errors.map((err) => (
                 <p key={err}>{err}</p>
             )) : null }</p>
         </form>
+        : "You Are Already Logged In" }
+        </>
     )
 
 }
