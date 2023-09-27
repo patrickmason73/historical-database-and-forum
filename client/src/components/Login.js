@@ -3,8 +3,7 @@ import React, { useState } from "react";
 
 
 
-function Login({ setCurrentUser, setLoggingIn, loggingIn }) {
-setLoggingIn(true);
+function Login({ setCurrentUser, currentUser }) {
 
     const [username, setUsername] = useState("");
     const [password, setPassword] = useState("");
@@ -23,7 +22,6 @@ setLoggingIn(true);
         if (r.ok) {
           r.json().then((user) => {
             setCurrentUser(user)
-            setLoggingIn(false)
           });
         } else {
           r.json().then((err) => setErrors(err.errors));
@@ -33,7 +31,7 @@ setLoggingIn(true);
 
     return (
       <>
-      { loggingIn ?
+      { currentUser ?
         <form onSubmit={handleSubmit}>
             <label> 
                 Username
@@ -55,7 +53,7 @@ setLoggingIn(true);
                 />
             </label>
             <br />
-            
+
             <button type="submit">Login</button>
             <p>{ errors.length > 0 ? errors.map((err) => (
                 <p key={err}>{err}</p>

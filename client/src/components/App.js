@@ -8,7 +8,6 @@ import {Routes, Route } from 'react-router-dom';
 
 function App() {
   const [currentUser, setCurrentUser] = useState(null)
-  const [loggingIn, setLoggingIn] = useState(false)
 
   useEffect(() => {
     fetch("/me").then((res) => {
@@ -34,7 +33,7 @@ function App() {
       }>
       </Route>
 
-      <Route path="/login" element={ <Login setCurrentUser={setCurrentUser} setLoggingIn={setLoggingIn} loggingIn={loggingIn} /> }>
+      <Route path="/login" element={ <Login setCurrentUser={setCurrentUser} currentUser={currentUser} /> }>
       </Route>
 
       <Route path="/signup" element={<Signup setCurrentUser={setCurrentUser}/>}>
