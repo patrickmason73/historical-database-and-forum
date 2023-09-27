@@ -31,7 +31,7 @@ function Login({ setCurrentUser, currentUser }) {
 
     return (
       <>
-      { currentUser ?
+      { currentUser != null  ?
         <form onSubmit={handleSubmit}>
             <label> 
                 Username
