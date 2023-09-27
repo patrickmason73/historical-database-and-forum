@@ -31,7 +31,7 @@ function Login({ setCurrentUser, currentUser }) {
 
     return (
       <>
-      { currentUser != null  ?
+      { currentUser == null  ?
         <form onSubmit={handleSubmit}>
             <label> 
                 Username
@@ -55,9 +55,10 @@ function Login({ setCurrentUser, currentUser }) {
             <br />
 
             <button type="submit">Login</button>
-            <p>{ errors.length > 0 ? errors.map((err) => (
+            <>{ errors.length > 0 ? errors.map((err) => (
                 <p key={err}>{err}</p>
-            )) : null }</p>
+            )) : null }
+            </>
         </form>
         : "You Are Already Logged In" }
         </>
