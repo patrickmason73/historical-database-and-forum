@@ -3,12 +3,13 @@ import Navbar from "./Navbar"
 import Header from "./Header";
 import Login from "./Login";
 import Signup from "./Signup";
-import Posts from "./Posts";
+import AddPost from "./AddPost";
 import {Routes, Route } from 'react-router-dom';
 
 
 function App() {
   const [currentUser, setCurrentUser] = useState(null)
+  const [posts, setPosts] = useState([])
 
   useEffect(() => {
     fetch("/me").then((res) => {
@@ -20,6 +21,12 @@ function App() {
     })
   }, [])
 
+  useEffect(() => {
+    fetch("/posts")
+    .then((res) => res.json())
+    .then(setPosts)
+  }, []);
+
   // const {id, username, displayName, bio, imgURL} = currentUser
 
   return (
@@ -29,18 +36,18 @@ function App() {
      <Routes>
       <Route path="/*" element={
         <>
-      <Header />
+      <Header posts={posts} />
       </>
       }>
+      </Route> 
+
+      <Route path="/login" element={<Login setCurrentUser={setCurrentUser} currentUser={currentUser} />}>
       </Route>
 
-      <Route path="/login" element={ <Login setCurrentUser={setCurrentUser} currentUser={currentUser} /> }>
+      <Route path="/signup" element={<Signup setCurrentUser={setCurrentUser} />}>
       </Route>
 
-      <Route path="/signup" element={<Signup setCurrentUser={setCurrentUser}/>}>
-      </Route>
-
-      <Route path="/posts/index" element={<Posts />}>
+      <Route path="/posts/index" element={<AddPost posts={posts} setPosts={setPosts} />}>
       </Route>
 
      </Routes>

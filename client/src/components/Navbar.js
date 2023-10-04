@@ -64,7 +64,7 @@ function Navbar({ setCurrentUser, currentUser }) {
               style={linkStyles}
              
               >
-                Posts
+                Add Post
               </NavLink>
 
                 <NavLink to="/logout" onClick={logout}>

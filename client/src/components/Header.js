@@ -13,7 +13,18 @@ const secondHeaderStyle = {
     backgroundColor: "#add8e6",
 }
 
-function Header() {
+function Header({ posts }) {
+
+    const displayPosts = 
+        posts.map((post) => {
+            return (
+            <>
+            <header>{post.title}</header>
+            <img src={post.imgURL} alt="img"></img>
+            <text>{post.content}</text>
+            <br />
+            </>
+        )})
 
     return (
         <>
@@ -22,6 +33,9 @@ function Header() {
         <p style={secondHeaderStyle}>Login To Get Started! If You Don't Have An Account, Sign Up!</p>
         <p style={secondHeaderStyle}>Look At Posts From Other Users! You Can Also Make Your Own.</p>
         <p style={secondHeaderStyle}>Found Something Interesting? Spotted Misinfomration? Leave A Comment Below The Post With Your Thoughts.</p>
+        
+        
+        {displayPosts}
         </>
     )
 }
