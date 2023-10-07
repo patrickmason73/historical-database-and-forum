@@ -31,6 +31,7 @@ function App() {
 
   return (
     <div className="App">
+      <button onClick={console.log(posts)}>CONSOLE LOG</button>
        {/* {currentUser != null && `Welcome ${displayName}`}  */}
       <Navbar setCurrentUser={setCurrentUser} currentUser={currentUser}/>
      <Routes>

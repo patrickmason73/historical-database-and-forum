@@ -63,6 +63,9 @@ function AddPost({ posts, setPosts }) {
                         onChange={(e) => setImgURL(e.target.value)}
                         />
                     </label>
+                    <br/>
+                    <br/>
+                    <button type="submit">CREATE POST</button>
                 </form>
         </div>
     )

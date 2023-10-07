@@ -17,13 +17,14 @@ function Header({ posts }) {
 
     const displayPosts = 
         posts.map((post) => {
+
             return (
-            <>
-            <header>{post.title}</header>
-            <img src={post.imgURL} alt="img"></img>
-            <text>{post.content}</text>
+            <div key={post.id}>
+            <h1>{post.title}</h1>
+            <img src={post.img_url} alt={post.img_url}></img>
+            <p>{post.content}</p>
             <br />
-            </>
+            </div>
         )})
 
     return (
