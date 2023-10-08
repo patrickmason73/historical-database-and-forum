@@ -1,12 +1,12 @@
 class PostsController < ApplicationController
  skip_before_action :authorize, only: :index
     def index
-        render json: Post.all
+        render json: Post.all, include: :comments
     end
 
     def show
         post = Post.find(params(:id))
-        render json: post
+        render json: post, include: :comments
     end
 
     def create

@@ -29,15 +29,20 @@ function App() {
 
   // const {id, username, displayName, bio, imgURL} = currentUser
 
+  function consoleLogButton() {
+    console.log(posts)
+  }
+
+
   return (
     <div className="App">
-      <button onClick={console.log(posts)}>CONSOLE LOG</button>
+      <button onClick={consoleLogButton}>CONSOLE LOG</button>
        {/* {currentUser != null && `Welcome ${displayName}`}  */}
       <Navbar setCurrentUser={setCurrentUser} currentUser={currentUser}/>
      <Routes>
       <Route path="/*" element={
         <>
-      <Header posts={posts} />
+      <Header posts={posts} currentUser={currentUser} />
       </>
       }>
       </Route> 

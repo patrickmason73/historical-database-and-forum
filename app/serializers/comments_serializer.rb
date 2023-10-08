@@ -1,3 +1,5 @@
 class CommentsSerializer < ActiveModel::Serializer
-  attributes :id
+  attributes :id, :content
+  belongs_to :user
+  belongs_to :post
 end

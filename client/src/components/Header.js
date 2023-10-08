@@ -1,4 +1,6 @@
-import React from "react";
+import React, {useState} from "react";
+import Comments from "./Comments";
+import AddComment from "./AddComment";
 
 const headerStyle = {
     display: "grid",
@@ -13,17 +15,22 @@ const secondHeaderStyle = {
     backgroundColor: "#add8e6",
 }
 
-function Header({ posts }) {
+function Header({ posts, currentUser }) {
+
+// const [addingComment, setAddingComment] = useState(false)
 
     const displayPosts = 
         posts.map((post) => {
-
+            const [comments, setComments] = useState(post.comments)
             return (
             <div key={post.id}>
             <h1>{post.title}</h1>
             <img src={post.img_url} alt={post.img_url}></img>
             <p>{post.content}</p>
+            {/* <button onClick={setAddingComment(true)}>Add Comment</button> */}
+            <AddComment post={post} currentUser={currentUser} setComments={setComments} comments={comments}/>
             <br />
+            <Comments comments={comments}/>
             </div>
         )})
 
