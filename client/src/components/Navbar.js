@@ -59,7 +59,7 @@ function Navbar({ setCurrentUser, currentUser }) {
                  Sign up
                 </NavLink>
                 
-                <NavLink to="/posts/index"
+                <NavLink to="/posts/new"
               
               style={linkStyles}
              

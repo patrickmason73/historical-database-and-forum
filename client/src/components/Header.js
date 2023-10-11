@@ -15,7 +15,7 @@ const secondHeaderStyle = {
     backgroundColor: "#add8e6",
 }
 
-function Header({ posts, currentUser }) {
+function Header({ posts, currentUser, filterComment }) {
 
 // const [addingComment, setAddingComment] = useState(false)
 
@@ -30,7 +30,7 @@ function Header({ posts, currentUser }) {
             {/* <button onClick={setAddingComment(true)}>Add Comment</button> */}
             <AddComment post={post} currentUser={currentUser} setComments={setComments} comments={comments}/>
             <br />
-            <Comments comments={comments}/>
+            <Comments comments={comments} post={post} filterComment={filterComment} currentUser={currentUser} setComments={setComments}/>
             </div>
         )})
 

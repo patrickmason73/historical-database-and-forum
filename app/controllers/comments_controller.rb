@@ -2,12 +2,12 @@ class CommentsController < ApplicationController
     skip_before_action :authorize, only: :index
 
     def index
-        render json: Comment.all, include: :user
+        render json: Comment.all, include: [:user, :post]
     end
 
     def show
         comment = Comment.find(params[:id])
-        render json: comment, include: :user
+        render json: comment, include: [:user, :post]
     end
 
     def create
@@ -16,11 +16,15 @@ class CommentsController < ApplicationController
     end
 
     def destroy
-
+        comment = @current_user.comments.find(params[:id])
+        comment.destroy!
+        head :no_content
     end
 
     def update
-
+        comment = @current_user.comments.find(params[:id])
+        comment.update!(comment_params)
+        render json: comment, status: :accepted
     end
 
     private

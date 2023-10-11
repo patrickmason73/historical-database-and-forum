@@ -6,6 +6,7 @@ Rails.application.routes.draw do
 
   resources :comments, only: [:index, :show, :create, :update, :destroy]
   resources :posts, only: [:index, :show, :create]
+  resources :users, only: :index
   get "/me", to: "users#show"
   post "/signup", to: "users#create"
   post "/login", to: "sessions#create"

@@ -10,6 +10,7 @@ import {Routes, Route } from 'react-router-dom';
 function App() {
   const [currentUser, setCurrentUser] = useState(null)
   const [posts, setPosts] = useState([])
+  const [users, setUsers] = useState([])
 
   useEffect(() => {
     fetch("/me").then((res) => {
@@ -27,12 +28,38 @@ function App() {
     .then(setPosts)
   }, []);
 
+  useEffect(() => {
+    fetch("/users")
+    .then((res) => res.json())
+    .then(setUsers)
+  }, []);
+
   // const {id, username, displayName, bio, imgURL} = currentUser
 
   function consoleLogButton() {
     console.log(posts)
+    console.log(users)
+    console.log(currentUser)
   }
 
+  function filterComment(commentId, postId) {
+    const postToUpdate = posts.find((post) => post.id === postId)
+    const updatedPosts = posts.map((post) => {
+      if (post === postToUpdate)
+      return {
+        ...postToUpdate,
+        comments: post.comments.filter((comment) => {
+          return comment.id !== commentId
+        })
+      }
+      else {return post}
+    })
+    setPosts(updatedPosts)
+}
+
+function handleUpdateComment() {
+
+}
 
   return (
     <div className="App">
@@ -42,7 +69,7 @@ function App() {
      <Routes>
       <Route path="/*" element={
         <>
-      <Header posts={posts} currentUser={currentUser} />
+      <Header posts={posts} currentUser={currentUser} filterComment={filterComment}/>
       </>
       }>
       </Route> 
@@ -53,7 +80,7 @@ function App() {
       <Route path="/signup" element={<Signup setCurrentUser={setCurrentUser} />}>
       </Route>
 
-      <Route path="/posts/index" element={<AddPost posts={posts} setPosts={setPosts} />}>
+      <Route path="/posts/new" element={<AddPost posts={posts} setPosts={setPosts} />}>
       </Route>
 
      </Routes>

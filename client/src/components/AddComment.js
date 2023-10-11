@@ -34,10 +34,11 @@ function handleSubmit(e) {
 
     return (
         <div>
+            {currentUser ?
             <form onSubmit={handleSubmit}>
                 <label>
-                    <h4>WRITE YOUR COMMENT HERE:</h4>
-                    <br/>
+                    <h4>Comment:</h4>
+                
                     <textarea 
                         rows="10"
                         cols="70"
@@ -49,7 +50,7 @@ function handleSubmit(e) {
                 </label>
                 <br/>
                 <button type="submit">POST COMMENT</button>
-            </form>
+            </form> : <strong>Login To Comment On Posts!</strong>}
         </div>
     )
 }
