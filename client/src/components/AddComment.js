@@ -3,9 +3,8 @@ import React, {useState} from "react";
 
 function AddComment({ post, currentUser, comments, setComments}) {
 
-    // const [comments, setComments] = useState(post.comments)
     const [newComment, setNewComment] = useState("")
-    const [editComment, setEditComment] = useState(false)
+    
 
 function handleAddComment(comment) {
     setComments([...comments, comment])

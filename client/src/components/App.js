@@ -57,10 +57,6 @@ function App() {
     setPosts(updatedPosts)
 }
 
-function handleUpdateComment() {
-
-}
-
   return (
     <div className="App">
       <button onClick={consoleLogButton}>CONSOLE LOG</button>

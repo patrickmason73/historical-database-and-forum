@@ -22,17 +22,38 @@ function Header({ posts, currentUser, filterComment }) {
     const displayPosts = 
         posts.map((post) => {
             const [comments, setComments] = useState(post.comments)
-            return (
-            <div key={post.id}>
-            <h1>{post.title}</h1>
-            <img src={post.img_url} alt={post.img_url}></img>
-            <p>{post.content}</p>
-            {/* <button onClick={setAddingComment(true)}>Add Comment</button> */}
-            <AddComment post={post} currentUser={currentUser} setComments={setComments} comments={comments}/>
-            <br />
-            <Comments comments={comments} post={post} filterComment={filterComment} currentUser={currentUser} setComments={setComments}/>
-            </div>
-        )})
+            function handleUpdatedComments(newComment) {
+                const editedComments = comments.map((comment) => {
+                    if (comment.id === newComment.id) {
+                        return newComment;
+                    }
+                    else {
+                        return comment;
+                    }
+                })
+                setComments(editedComments)
+            }
+            function handleDeleteComment(comment) {
+                fetch(`/comments/${comment.id}`, {
+                    method: "DELETE",
+                }).then((res) => {
+                    if (res.ok) {
+                       filterComment(comment.id, post.id)
+                         const newComments = comments.filter((item) => {return item.id !== comment.id})
+                         setComments(newComments)
+                    }
+                })}
+                return (
+                <div key={post.id}>
+                <h1>{post.title}</h1>
+                <img src={post.img_url} alt={post.img_url}></img>
+                <p>{post.content}</p>
+                {/* <button onClick={setAddingComment(true)}>Add Comment</button> */}
+                <AddComment post={post} currentUser={currentUser} setComments={setComments} comments={comments}/>
+                <br />
+                <Comments comments={comments} post={post} filterComment={filterComment} currentUser={currentUser} setComments={setComments} handleUpdatedComments={handleUpdatedComments} handleDeleteComment={handleDeleteComment}/>
+                </div>
+            )})
 
     return (
         <>
