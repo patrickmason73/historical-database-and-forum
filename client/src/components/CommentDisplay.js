@@ -30,9 +30,11 @@ function consoleLog(comment) {
     return (
         <div>
             <h3>{commentUser ? commentUser.display_name : currentUser.display_name}</h3>
-                     <p>{comment.content}</p>
-                    { currentUser.id === commentUser.id ? <button onClick={() => handleDeleteComment(comment)}>Delete Comment</button> : null}
-                    { currentUser.id === commentUser.id ? <button onClick={() => setEditing(current => !current)}>{editing ? "Cancel" : "Edit Comment"}</button> : null}
+                    <p>{comment.content}</p>
+           
+                    {(currentUser !== null && currentUser.id === commentUser.id) && <button onClick={() => handleDeleteComment(comment)}>Delete Comment</button>}
+                    {(currentUser !== null && currentUser.id === commentUser.id) && <button onClick={() => setEditing(current => !current)}>{editing ? "Cancel" : "Edit Comment"}</button>}
+                   
                     {editing ? 
                     <form onSubmit={(e) => handleSubmit(e, comment)}>
                             <label>

@@ -7,7 +7,7 @@ function AddComment({ post, currentUser, comments, setComments}) {
     
 
 function handleAddComment(comment) {
-    setComments([...comments, comment])
+    setComments([comment, ...comments])
 }
 
 function handleSubmit(e) {

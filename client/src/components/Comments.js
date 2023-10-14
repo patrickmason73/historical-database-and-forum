@@ -22,7 +22,7 @@ const displayComments = comments.map((comment) => {
 })
 
     return (
-        <div>
+        <div key={post.id}>
             {displayComments}
         </div>
     )
