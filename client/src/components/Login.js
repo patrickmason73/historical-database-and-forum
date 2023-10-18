@@ -1,9 +1,11 @@
-import React, { useState } from "react";
+import React, { useState, useContext } from "react";
+import UserDisplay from "./UserDisplay";
+import { UserContext } from "./contexts/UserContext";
 
 
 
-
-function Login({ setCurrentUser, currentUser }) {
+function Login() {
+    const {setCurrentUser, currentUser} = useContext(UserContext)
 
     const [username, setUsername] = useState("");
     const [password, setPassword] = useState("");
@@ -61,7 +63,7 @@ function Login({ setCurrentUser, currentUser }) {
             )) : null }
             </>
         </form>
-        : "You Are Already Logged In" }
+        : <UserDisplay /> }
         </>
     )
 

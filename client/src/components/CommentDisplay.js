@@ -1,6 +1,9 @@
-import React, {useState} from "react";
+import React, {useState, useContext} from "react";
+import { UserContext } from "./contexts/UserContext";
 
-function CommentDisplay({ comment, commentUser, currentUser, handleDeleteComment, handleUpdatedComments }) {
+function CommentDisplay({ comment, commentUser, handleDeleteComment, handleUpdatedComments }) {
+
+ const {currentUser} = useContext(UserContext)
 
  const [editing, setEditing] = useState(false)
  const [newComment, setNewComment] = useState(comment.content)
@@ -30,7 +33,7 @@ function consoleLog(comment) {
     return (
         <div>
             <h3>{commentUser ? commentUser.display_name : currentUser.display_name}</h3>
-                    <p>{comment.content}</p>
+                    <p>{comment ? comment.content : null}</p>
            
                     {(currentUser !== null && currentUser.id === commentUser.id) && <button onClick={() => handleDeleteComment(comment)}>Delete Comment</button>}
                     {(currentUser !== null && currentUser.id === commentUser.id) && <button onClick={() => setEditing(current => !current)}>{editing ? "Cancel" : "Edit Comment"}</button>}

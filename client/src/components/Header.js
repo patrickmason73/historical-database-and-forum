@@ -8,6 +8,13 @@ const headerStyle = {
     fontSize: "200%"
 }
 
+const postHeaderStyle = {
+    margin: 0,
+    padding: "5px",
+    backgroundColor: "lightgray",
+    display: "block",
+}
+
 const secondHeaderStyle = {
     display: "grid",
     placeItems: "center",
@@ -15,7 +22,14 @@ const secondHeaderStyle = {
     backgroundColor: "#add8e6",
 }
 
-function Header({ posts, currentUser, filterComment }) {
+const thirdHeaderStyle = {
+    display: "grid",
+    placeItems: "start",
+    fontSize: "175%",
+    paddingLeft: "5px"
+}
+
+function Header({ posts, filterComment }) {
 
 // const [addingComment, setAddingComment] = useState(false)
 
@@ -44,15 +58,17 @@ function Header({ posts, currentUser, filterComment }) {
                     }
                 })}
                 return (
-                <div key={post.id}>
-                <h1>{post.title}</h1>
-                <img src={post.img_url} alt={post.img_url}></img>
-                <p>{post.content}</p>
-                {/* <button onClick={setAddingComment(true)}>Add Comment</button> */}
-                <AddComment post={post} currentUser={currentUser} setComments={setComments} comments={comments}/>
-                <br />
-                <Comments comments={comments} post={post} filterComment={filterComment} currentUser={currentUser} setComments={setComments} handleUpdatedComments={handleUpdatedComments} handleDeleteComment={handleDeleteComment}/>
-                </div>
+                <article key={post.id} style={postHeaderStyle}>
+                    <article style={secondHeaderStyle}>
+                    <h1>{post.title}</h1>
+                    <img src={post.img_url} alt={post.img_url}></img>
+                    <p>{post.content}</p>
+                    {/* <button onClick={setAddingComment(true)}>Add Comment</button> */}
+                    <AddComment post={post} setComments={setComments} comments={comments}/>
+                    <br />
+                    <Comments comments={comments} post={post} filterComment={filterComment} setComments={setComments} handleUpdatedComments={handleUpdatedComments} handleDeleteComment={handleDeleteComment}/>
+                    </article>
+                 </article>
             )})
 
     return (
@@ -62,7 +78,9 @@ function Header({ posts, currentUser, filterComment }) {
         <p style={secondHeaderStyle}>Login To Get Started! If You Don't Have An Account, Sign Up!</p>
         <p style={secondHeaderStyle}>Look At Posts From Other Users! You Can Also Make Your Own.</p>
         <p style={secondHeaderStyle}>Found Something Interesting? Spotted Misinfomration? Leave A Comment Below The Post With Your Thoughts.</p>
-        
+     
+
+        <h3 style={thirdHeaderStyle}>Posts:</h3>
         
         {displayPosts}
         </>

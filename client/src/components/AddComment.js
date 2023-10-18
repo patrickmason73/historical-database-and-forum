@@ -1,8 +1,8 @@
-import React, {useState} from "react";
+import React, {useState, useContext} from "react";
+import { UserContext } from "./contexts/UserContext";
 
-
-function AddComment({ post, currentUser, comments, setComments}) {
-
+function AddComment({ post, comments, setComments}) {
+    const {currentUser} = useContext(UserContext)
     const [newComment, setNewComment] = useState("")
     
 

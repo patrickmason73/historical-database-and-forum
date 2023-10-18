@@ -1,26 +1,22 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useContext } from "react";
 import Navbar from "./Navbar"
 import Header from "./Header";
 import Login from "./Login";
 import Signup from "./Signup";
 import AddPost from "./AddPost";
 import {Routes, Route } from 'react-router-dom';
+import { UserContext } from "./contexts/UserContext";
+
 
 
 function App() {
-  const [currentUser, setCurrentUser] = useState(null)
+
+  const {currentUser, setCurrentUser} = useContext(UserContext)
+  
   const [posts, setPosts] = useState([])
   const [users, setUsers] = useState([])
 
-  useEffect(() => {
-    fetch("/me").then((res) => {
-      if (res.ok) {
-        res.json().then((user) => {
-        setCurrentUser(user)
-        console.log(user)
-      })}
-    })
-  }, [])
+
 
   useEffect(() => {
     fetch("/posts")
@@ -33,6 +29,17 @@ function App() {
     .then((res) => res.json())
     .then(setUsers)
   }, []);
+
+  function logout() {
+    fetch("/logout", {
+      method: "DELETE",
+    }).then((res) => {
+      if (res.ok) {
+        setCurrentUser(null)
+        console.log(res)
+      }
+    })
+  }
 
   // const {id, username, displayName, bio, imgURL} = currentUser
 
@@ -60,20 +67,20 @@ function App() {
   return (
     <div className="App">
       <button onClick={consoleLogButton}>CONSOLE LOG</button>
-       {/* {currentUser != null && `Welcome ${displayName}`}  */}
-      <Navbar setCurrentUser={setCurrentUser} currentUser={currentUser}/>
+       <strong>{currentUser !== null && `Welcome back, ${currentUser.display_name}`}</strong>
+      <Navbar logout={logout}/>
      <Routes>
       <Route path="/*" element={
         <>
-      <Header posts={posts} currentUser={currentUser} filterComment={filterComment}/>
+      <Header posts={posts} filterComment={filterComment}/>
       </>
       }>
       </Route> 
 
-      <Route path="/login" element={<Login setCurrentUser={setCurrentUser} currentUser={currentUser} />}>
+      <Route path="/login" element={<Login />}>
       </Route>
 
-      <Route path="/signup" element={<Signup setCurrentUser={setCurrentUser} />}>
+      <Route path="/signup" element={<Signup />}>
       </Route>
 
       <Route path="/posts/new" element={<AddPost posts={posts} setPosts={setPosts} />}>

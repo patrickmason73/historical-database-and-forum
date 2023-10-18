@@ -1,8 +1,11 @@
-import React, { useState } from "react"
+import React, { useState, useContext } from "react"
+import { UserContext } from "./contexts/UserContext"
 
 
 
-function Signup ({ setCurrentUser }) {
+function Signup () {
+    const {setCurrentUser} = useContext(UserContext)
+
     const [username, setUsername] = useState("")
     const [password, setPassword] = useState("")
     const [passwordConfirmation, setPasswordConfirmation] = useState("")

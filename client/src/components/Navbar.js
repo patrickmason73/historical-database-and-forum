@@ -1,5 +1,6 @@
-import React from 'react';
+import React, {useContext} from 'react';
 import { NavLink } from 'react-router-dom';
+import { UserContext } from './contexts/UserContext';
 
 const linkStyles = {
     width: "150px",
@@ -18,19 +19,8 @@ const linkStyles = {
     justifyContent: "center",
   }
 
-function Navbar({ setCurrentUser, currentUser }) {
-
-  function logout() {
-    fetch("/logout", {
-      method: "DELETE",
-    }).then((res) => {
-      if (res.ok) {
-        setCurrentUser(null)
-        console.log(res)
-      }
-    })
-  }
-
+function Navbar({ logout }) {
+    const {currentUser} = useContext(UserContext)
 
     return (
         <div >
@@ -48,7 +38,7 @@ function Navbar({ setCurrentUser, currentUser }) {
                 style={linkStyles}
                
                 >
-                 Login
+                 {currentUser ? "My Account" : "Login"}
                 </NavLink>
                 
                 <NavLink to="/signup"
@@ -67,9 +57,9 @@ function Navbar({ setCurrentUser, currentUser }) {
                 Add Post
               </NavLink>
 
-                <NavLink to="/logout" onClick={logout}>
+                {currentUser ? <NavLink to="/logout" onClick={logout}>
                 Log Out
-                </NavLink>
+                </NavLink> : null}
                 </nav>
         </div>
     )

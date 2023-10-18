@@ -2,7 +2,7 @@ import React from "react";
 import CommentDisplay from "./CommentDisplay";
 
 
-function Comments({ comments, post, currentUser, handleUpdatedComments, handleDeleteComment }) {
+function Comments({ comments, post, handleUpdatedComments, handleDeleteComment }) {
 
 
 
@@ -16,7 +16,7 @@ const displayComments = comments.map((comment) => {
  const commentUser = post.users.find((user) => user.id === comment.user_id)
     return (
         <div key={comment.id}>
-            <CommentDisplay comment={comment} commentUser={commentUser} currentUser={currentUser} handleDeleteComment={handleDeleteComment} handleUpdatedComments={handleUpdatedComments}/>
+            <CommentDisplay comment={comment} commentUser={commentUser} handleDeleteComment={handleDeleteComment} handleUpdatedComments={handleUpdatedComments}/>
         </div>
     )
 })
