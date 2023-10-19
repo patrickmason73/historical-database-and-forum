@@ -6,6 +6,7 @@ function AddPost({ posts, setPosts }) {
     const [title, setTitle] = useState("")
     const [content, setContent] = useState("")
     const [imgURL, setImgURL] = useState("")
+    const [errors, setErrors] = useState([])
 
     function handleSubmit(e) {
         e.preventDefault();
@@ -22,6 +23,8 @@ function AddPost({ posts, setPosts }) {
         }).then((res) => {
             if (res.ok) {
                 setPosts((post) => [...posts, post])
+            } else {
+                res.json().then((err) => setErrors(err.errors))
             }
         })
     }
@@ -66,6 +69,9 @@ function AddPost({ posts, setPosts }) {
                     <br/>
                     <br/>
                     <button type="submit">CREATE POST</button>
+                    <ul>{errors.map((err) => (
+                         <li key={err}>{err}</li>
+                     ))}</ul>
                 </form>
         </div>
     )

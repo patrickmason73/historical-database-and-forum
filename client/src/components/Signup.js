@@ -104,9 +104,9 @@ function Signup () {
             </label>
             <br />
             <button type="submit">CREATE ACCOUNT</button>
-            <p>{errors.map((err) => (
-                <p key={err}>{err}</p>
-            ))}</p>
+            <ul>{errors.map((err) => (
+                <li key={err}>{err}</li>
+            ))}</ul>
         </form>
     )
 

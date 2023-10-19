@@ -63,7 +63,6 @@ function Header({ posts, filterComment }) {
                     <h1>{post.title}</h1>
                     <img src={post.img_url} alt={post.img_url}></img>
                     <p>{post.content}</p>
-                    {/* <button onClick={setAddingComment(true)}>Add Comment</button> */}
                     <AddComment post={post} setComments={setComments} comments={comments}/>
                     <br />
                     <Comments comments={comments} post={post} filterComment={filterComment} setComments={setComments} handleUpdatedComments={handleUpdatedComments} handleDeleteComment={handleDeleteComment}/>
