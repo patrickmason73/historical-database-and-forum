@@ -1,29 +1,40 @@
-import React from "react";
+import React, { useContext } from "react";
 import CommentDisplay from "./CommentDisplay";
+import { UserContext } from "./contexts/UserContext";
+import AddComment from "./AddComment";
 
+const postHeaderStyle = {
+    backgroundColor: "lightgray",
+    display: "block",
+    borderStyle: "solid",
+}
 
-function Comments({ comments, post, handleUpdatedComments, handleDeleteComment }) {
+const strongStyle = {
+    fontSize: "150%"
+}
 
+function Comments({ allComments, post, handleUpdatedComments, handleDeleteComment, handleAddComment, errors }) {
+    const {currentUser} = useContext(UserContext)
 
-
-
-
-
-
-
-
-const displayComments = comments.map((comment) => {
- const commentUser = post.users.find((user) => user.id === comment.user_id)
-    return (
+const displayComments = post.comments.map((comment) => {
+    if (comment !== null) {
+        return (
         <div key={comment.id}>
-            <CommentDisplay comment={comment} commentUser={commentUser} handleDeleteComment={handleDeleteComment} handleUpdatedComments={handleUpdatedComments}/>
+            {/* <button onClick={() => console.log(comment)}>consolelog comment</button> */}
+            <CommentDisplay comment={comment} errors={errors} allComments={allComments} post={post} handleDeleteComment={handleDeleteComment} handleUpdatedComments={handleUpdatedComments}/>
         </div>
-    )
+    )} else {return null}
 })
 
     return (
         <div key={post.id}>
-            {displayComments}
+            <div style={postHeaderStyle}>
+            <AddComment post={post} handleAddComment={handleAddComment} errors={errors} />
+                <strong style={strongStyle}>User Comments:</strong>
+                <button onClick={() => console.log(post.comments)}>consoleLog</button>
+                {displayComments}
+            </div>
+           
         </div>
     )
 }

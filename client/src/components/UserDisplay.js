@@ -4,7 +4,7 @@ import { UserContext } from "./contexts/UserContext";
 const imgStyle = {
     display: "block",
     width: "300px",
-    height: "250px",
+    height: "300px",
     paddingLeft: "10px"
 }
 
@@ -34,28 +34,42 @@ const articleStyle = {
     display: "block", 
 }
 
-function UserDisplay() {
+function UserDisplay({ posts }) {
     const {currentUser} = useContext(UserContext)
+    // const [userCommments, setUserComments] = useState([currentUser.comments])
 
-    const postsToDisplay = currentUser.posts.reduce((acc, current) => {
-        if(!acc.find((item) => item.id === current.id)) {
-            acc.push(current);
-        }
-        return acc;
-    }, [])
+    // useEffect(() => {
+    //     setUserComments([currentUser.comments])
+    // }, [currentUser.comments])
+
+    // const postsToDisplay = currentUser.posts.reduce((acc, current) => {
+    //     if(!acc.find((item) => item.id === current.id)) {
+    //         acc.push(current);
+    //     }
+    //     return acc;
+    // }, [])
+
+    const postsDisplay = posts.map((post) => {
+        if (post.users.find(user => user.id === currentUser.id)) {
+            return post
+        } else {return null}
+    })
+
 
     
     
-    const displayPosts = postsToDisplay.map((post) => {
-        const postComments = currentUser.comments.map((comment) => {
+    const displayPosts = postsDisplay.map((post) => {
+        if (post !== null) {
+        const postComments = post.comments.map((comment) => {
+            if (comment.user_id === currentUser.id) {
             return (
               <li key={comment.id}>
-                {comment.post_id === post.id && comment.content}
-                <br/>
+                <p>{comment.post_id === post.id && comment.content}</p>
               </li>
-            )
-        })
+              )} else {return null}
+             })
         return (
+    //    post.users.includes((e) => e.id === currentUser.id) ? 
         <article key={post.id} style={articleStyle}>
             <article >
             <h1 style={postTitleStyle}>{post.title}</h1>
@@ -67,15 +81,18 @@ function UserDisplay() {
             </ol>
             </article>
         </article>
+    //    : null
         )
-    })
+} else {return null}
+})
 
     return (
         <div>
             <strong style={headerStyle}>Display Name: {currentUser.display_name}</strong>
             <br />
            <strong style={postHeaderStyle}> Here are the posts you have commented on:</strong>
-            {displayPosts}
+            {currentUser.comments !== null && displayPosts}
+            <button onClick={() => console.log(currentUser.comments)}>consoleLog</button>
         </div>
     )
 

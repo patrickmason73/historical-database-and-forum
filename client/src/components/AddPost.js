@@ -2,31 +2,15 @@ import React, { useState } from "react";
 
 
 
-function AddPost({ posts, setPosts }) {
+function AddPost({ addPost, errors }) {
     const [title, setTitle] = useState("")
     const [content, setContent] = useState("")
     const [imgURL, setImgURL] = useState("")
-    const [errors, setErrors] = useState([])
+    
 
     function handleSubmit(e) {
         e.preventDefault();
-        fetch("/posts", {
-            method: "POST",
-            headers: {
-                "Content-Type": "application/json",
-            },
-            body: JSON.stringify({
-                title,
-                content,
-                img_url: imgURL,
-            }),
-        }).then((res) => {
-            if (res.ok) {
-                setPosts((post) => [...posts, post])
-            } else {
-                res.json().then((err) => setErrors(err.errors))
-            }
-        })
+        addPost(title, content, imgURL)
     }
 
 
@@ -69,7 +53,7 @@ function AddPost({ posts, setPosts }) {
                     <br/>
                     <br/>
                     <button type="submit">CREATE POST</button>
-                    <ul>{errors.map((err) => (
+                    <ul>{errors && errors.map((err) => (
                          <li key={err}>{err}</li>
                      ))}</ul>
                 </form>

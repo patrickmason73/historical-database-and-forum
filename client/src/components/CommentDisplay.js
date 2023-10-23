@@ -1,45 +1,45 @@
 import React, {useState, useContext} from "react";
 import { UserContext } from "./contexts/UserContext";
 
-function CommentDisplay({ comment, commentUser, handleDeleteComment, handleUpdatedComments }) {
+const postHeaderStyle = {
+    padding: "20px",
+    backgroundColor: "lightgray",
+    display: "block",
+    borderStyle: "solid",
+}
+
+function CommentDisplay({ comment, allComments, handleDeleteComment, handleUpdatedComments, post }) {
+
 
  const {currentUser} = useContext(UserContext)
 
  const [editing, setEditing] = useState(false)
  const [newComment, setNewComment] = useState(comment.content)
 
+//   const commentUser = post.users.includes((user) => user.id === comment.user_id)
+    
+    const currentComment = allComments.find((e) => e.id === comment.id)
+    const commentUser = post.users.find((user) => {if (user !== null) {return (user.id === comment.user_id)} else {return null}})
+
  function handleSubmit(e, comment) {
     e.preventDefault();
-    fetch(`/comments/${comment.id}`, {
-        method: "PATCH", 
-        headers: {
-            "Content-type" : "application/json",
-        },
-        body: JSON.stringify({
-            content: newComment,
-        }),
-    })
-    .then((r) => r.json())
-    .then((data) => {
-        handleUpdatedComments(data);
-        setEditing(false);
-    })
-}
-
-function consoleLog(comment) {
-    console.log(comment)
+    handleUpdatedComments(newComment, comment);
+    setEditing(false);
 }
 
     return (
         <div>
-            <h3>{commentUser ? commentUser.display_name : currentUser.display_name}</h3>
-                    <p>{comment ? comment.content : null}</p>
+            {commentUser !== null ? 
+            <article style={postHeaderStyle}>
+            <h3>{commentUser.display_name}</h3>
+                    <p>{comment.content}</p>
+            
            
-                    {(currentUser !== null && currentUser.id === commentUser.id) && <button onClick={() => handleDeleteComment(comment)}>Delete Comment</button>}
+                    {(currentUser !== null && currentUser.id === commentUser.id) && <button onClick={() => handleDeleteComment(currentComment)}>Delete Comment</button>}
                     {(currentUser !== null && currentUser.id === commentUser.id) && <button onClick={() => setEditing(current => !current)}>{editing ? "Cancel" : "Edit Comment"}</button>}
                    
                     {editing ? 
-                    <form onSubmit={(e) => handleSubmit(e, comment)}>
+                    <form onSubmit={(e) => handleSubmit(e, currentComment)}>
                             <label>
                                 <h4>Comment:</h4>
                                 <textarea 
@@ -55,7 +55,9 @@ function consoleLog(comment) {
                             <button type="submit">UPDATE COMMENT</button>
                     </form>
                         : null}
-            <button onClick={() => consoleLog(comment)}>console.log</button>
+            {/* <button onClick={() => consoleLog(comment)}>console.log</button> */}
+            </article>
+            : null}
         </div>
     )
 

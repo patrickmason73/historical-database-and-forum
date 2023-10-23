@@ -1,5 +1,4 @@
 import React, { useState, useContext } from "react";
-import UserDisplay from "./UserDisplay";
 import { UserContext } from "./contexts/UserContext";
 
 
@@ -11,7 +10,12 @@ function Login() {
     const [password, setPassword] = useState("");
     const [errors, setErrors] = useState([]);
 
-  
+  //   const postsDisplay = posts.map((post) => {
+  //     if (post.users.find(user => user.id === currentUser.id)) {
+  //         return post
+  //     }
+  // })
+
     function handleSubmit(e) {
       e.preventDefault();
       fetch("/login", {
@@ -34,7 +38,7 @@ function Login() {
 
     return (
       <>
-      { currentUser == null  ?
+      { currentUser === null ?
         <form onSubmit={handleSubmit}>
             <label> 
                 Username
@@ -58,12 +62,11 @@ function Login() {
             <br />
 
             <button type="submit">Login</button>
-            <>{ errors.length > 0 ? errors.map((err) => (
-                <p key={err}>{err}</p>
-            )) : null }
-            </>
+            <ul>{errors.map((err) => (
+                <li key={err}>{err}</li>
+            ))}</ul>
         </form>
-        : <UserDisplay /> }
+        : null }
         </>
     )
 
