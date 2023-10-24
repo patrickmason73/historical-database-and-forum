@@ -198,7 +198,7 @@ function App() {
       <Route path="/signup" element={<Signup />}>
       </Route>
 
-      <Route path="/posts/new" element={<AddPost addPost={addPost} errors={errors} />}>
+      <Route path="/posts/new" element={(currentUser ? <AddPost addPost={addPost} errors={errors} /> : <h1>Log in or sign up to create posts!</h1>)}>
       </Route>
 
      </Routes>

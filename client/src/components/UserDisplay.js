@@ -69,7 +69,7 @@ function UserDisplay({ posts }) {
               )} else {return null}
              })
         return (
-    //    post.users.includes((e) => e.id === currentUser.id) ? 
+
         <article key={post.id} style={articleStyle}>
             <article >
             <h1 style={postTitleStyle}>{post.title}</h1>
@@ -81,7 +81,7 @@ function UserDisplay({ posts }) {
             </ol>
             </article>
         </article>
-    //    : null
+
         )
 } else {return null}
 })
@@ -92,7 +92,7 @@ function UserDisplay({ posts }) {
             <br />
            <strong style={postHeaderStyle}> Here are the posts you have commented on:</strong>
             {currentUser.comments !== null && displayPosts}
-            <button onClick={() => console.log(currentUser.comments)}>consoleLog</button>
+            {/* <button onClick={() => console.log(currentUser.comments)}>consoleLog</button> */}
         </div>
     )
 
