@@ -47,7 +47,7 @@ const thirdHeaderStyle = {
     paddingLeft: "5px"
 }
 
-function Header({ allComments, posts, filterComment, updatedComments, addComment, errors, setErrors }) {
+function Header({ posts, filterComment, updatedComments, addComment, errors, setErrors }) {
 
 // const [addingComment, setAddingComment] = useState(false)
 
@@ -85,16 +85,14 @@ function Header({ allComments, posts, filterComment, updatedComments, addComment
             }
 
                 return (
-                <article key={post.id} style={postHeaderStyle}>
-                    <article style={secondHeaderStyle}>
+                <article style={postHeaderStyle} key={post.id}>
+                    <article style={secondHeaderStyle} >
                     <h1 style={titleStyle}>{post.title}</h1>
                     <img src={post.img_url} alt={post.img_url} style={imgStyle}></img>
                     <p>{post.content}</p>
                     <br />
-                    <article>
-                   
-                    <Comments errors={errors} allComments={allComments} post={post} handleAddComment={handleAddComment} handleUpdatedComments={handleUpdatedComments} handleDeleteComment={handleDeleteComment}/>
-                    </article>
+                    <AddComment post={post} handleAddComment={handleAddComment} errors={errors} />
+                    {post.comments ? <Comments errors={errors} post={post} handleUpdatedComments={handleUpdatedComments} handleDeleteComment={handleDeleteComment}/> : null}
                     </article>
                  </article>
             )})

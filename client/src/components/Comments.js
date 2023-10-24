@@ -13,7 +13,7 @@ const strongStyle = {
     fontSize: "150%"
 }
 
-function Comments({ allComments, post, handleUpdatedComments, handleDeleteComment, handleAddComment, errors }) {
+function Comments({ post, handleUpdatedComments, handleDeleteComment, errors }) {
     const {currentUser} = useContext(UserContext)
 
 const displayComments = post.comments.map((comment) => {
@@ -21,7 +21,7 @@ const displayComments = post.comments.map((comment) => {
         return (
         <div key={comment.id}>
             {/* <button onClick={() => console.log(comment)}>consolelog comment</button> */}
-            <CommentDisplay comment={comment} errors={errors} allComments={allComments} post={post} handleDeleteComment={handleDeleteComment} handleUpdatedComments={handleUpdatedComments}/>
+            <CommentDisplay comment={comment} errors={errors} post={post} handleDeleteComment={handleDeleteComment} handleUpdatedComments={handleUpdatedComments}/>
         </div>
     )} else {return null}
 })
@@ -29,9 +29,9 @@ const displayComments = post.comments.map((comment) => {
     return (
         <div key={post.id}>
             <div style={postHeaderStyle}>
-            <AddComment post={post} handleAddComment={handleAddComment} errors={errors} />
+           
                 <strong style={strongStyle}>User Comments:</strong>
-                <button onClick={() => console.log(post.comments)}>consoleLog</button>
+                {/* <button onClick={() => console.log(post.comments)}>consoleLog</button> */}
                 {displayComments}
             </div>
            

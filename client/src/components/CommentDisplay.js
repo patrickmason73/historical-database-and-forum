@@ -8,7 +8,7 @@ const postHeaderStyle = {
     borderStyle: "solid",
 }
 
-function CommentDisplay({ comment, allComments, handleDeleteComment, handleUpdatedComments, post }) {
+function CommentDisplay({ comment, handleDeleteComment, handleUpdatedComments, post }) {
 
 
  const {currentUser} = useContext(UserContext)
@@ -18,7 +18,7 @@ function CommentDisplay({ comment, allComments, handleDeleteComment, handleUpdat
 
 //   const commentUser = post.users.includes((user) => user.id === comment.user_id)
     
-    const currentComment = allComments.find((e) => e.id === comment.id)
+    // const currentComment = allComments.find((e) => e.id === comment.id)
     const commentUser = post.users.find((user) => {if (user !== null) {return (user.id === comment.user_id)} else {return null}})
 
  function handleSubmit(e, comment) {
@@ -35,11 +35,11 @@ function CommentDisplay({ comment, allComments, handleDeleteComment, handleUpdat
                     <p>{comment.content}</p>
             
            
-                    {(currentUser !== null && currentUser.id === commentUser.id) && <button onClick={() => handleDeleteComment(currentComment)}>Delete Comment</button>}
+                    {(currentUser !== null && currentUser.id === commentUser.id) && <button onClick={() => handleDeleteComment(comment)}>Delete Comment</button>}
                     {(currentUser !== null && currentUser.id === commentUser.id) && <button onClick={() => setEditing(current => !current)}>{editing ? "Cancel" : "Edit Comment"}</button>}
                    
                     {editing ? 
-                    <form onSubmit={(e) => handleSubmit(e, currentComment)}>
+                    <form onSubmit={(e) => handleSubmit(e, comment)}>
                             <label>
                                 <h4>Comment:</h4>
                                 <textarea 

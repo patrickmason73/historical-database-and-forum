@@ -5,7 +5,7 @@ import Login from "./Login";
 import Signup from "./Signup";
 import AddPost from "./AddPost";
 import UserDisplay from "./UserDisplay";
-import {Routes, Route } from 'react-router-dom';
+import {Routes, Route, useNavigate } from 'react-router-dom';
 import { UserContext } from "./contexts/UserContext";
 
 
@@ -13,9 +13,10 @@ import { UserContext } from "./contexts/UserContext";
 function App() {
 
   const {currentUser, setCurrentUser} = useContext(UserContext)
+  const navigate = useNavigate();
   
   const [posts, setPosts] = useState([])
-  const [allComments, setAllComments] = useState([])
+  // const [allComments, setAllComments] = useState([])
   const [errors, setErrors] = useState([])
 
 
@@ -25,11 +26,11 @@ function App() {
     .then(setPosts)
   }, []);
 
-  useEffect(() => {
-    fetch("/comments")
-    .then((res) => res.json())
-    .then(setAllComments)
-  }, [posts]);
+  // useEffect(() => {
+  //   fetch("/comments")
+  //   .then((res) => res.json())
+  //   .then(setAllComments)
+  // }, [posts]);
 
   function logout() {
     fetch("/logout", {
@@ -52,11 +53,16 @@ function App() {
           title,
           content,
           img_url: imgURL,
+          comments: [],
+          users: [],
       }),
   }).then((res) => {
       if (res.ok) {
-          setPosts((post) => [post, ...posts])
+        res.json().then((data) => {
+          setPosts([data, ...posts])
           setErrors([])
+          navigate("/")
+        })
       } else {
           res.json().then((err) => setErrors(err.errors))
       }
@@ -65,7 +71,6 @@ function App() {
 
   function consoleLogButton() {
     console.log(posts)
-    console.log(allComments)
     console.log(currentUser)
   }
 
@@ -169,11 +174,6 @@ function App() {
       else {res.json().then((err) => setErrors(err.errors))}
   })}
 
-//   const postsDisplay = posts.map((post) => {
-//     if (currentUser !== null && post.users.find(user => user.id === currentUser.id)) {
-//         return post
-//     } else {return null}
-// })
 
 
   return (
@@ -184,7 +184,7 @@ function App() {
      <Routes>
       <Route path="/*" element={
         <>
-      <Header posts={posts} allComments={allComments} filterComment={filterComment} updatedComments={updatedComments} addComment={addComment} errors={errors} setErrors={setErrors}/>
+      <Header posts={posts} filterComment={filterComment} updatedComments={updatedComments} addComment={addComment} errors={errors} setErrors={setErrors}/>
       </>
       }>
       </Route> 
