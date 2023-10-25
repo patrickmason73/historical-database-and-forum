@@ -10,7 +10,9 @@ const postHeaderStyle = {
 }
 
 const strongStyle = {
-    fontSize: "150%"
+    fontSize: "150%",
+    paddingTop: "12px",
+    paddingLeft: "7px"
 }
 
 function Comments({ post, handleUpdatedComments, handleDeleteComment, errors }) {
@@ -26,10 +28,12 @@ const displayComments = post.comments.map((comment) => {
 })
 
     return (
-        <div key={post.id}>
+        <div key={post.id} style={{padding:"5px"}}>
+        
             <div style={postHeaderStyle}>
-           
-                <strong style={strongStyle}>User Comments:</strong>
+            <strong style={strongStyle}>User Comments:</strong>
+                
+                <br/>
                 {displayComments}
             </div>
            

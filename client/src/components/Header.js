@@ -73,6 +73,7 @@ function Header({ posts, filterComment, updatedComments, addComment, errors }) {
                     <p>{post.content}</p>
                     <br />
                     <AddComment post={post} handleAddComment={handleAddComment} errors={errors} />
+                    <br/>
                     {post.comments ? <Comments errors={errors} post={post} handleUpdatedComments={handleUpdatedComments} handleDeleteComment={handleDeleteComment}/> : null}
                     </article>
                  </article>
@@ -80,14 +81,14 @@ function Header({ posts, filterComment, updatedComments, addComment, errors }) {
 
     return (
         <>
-        <p style={headerStyle}><strong>HISTORICAL EVENTS PROJECT</strong></p>
+        <p style={headerStyle}><strong>HISTORICAL EVENTS AND PEOPLE DATABASE</strong></p>
 
-        <p style={secondStyle}>Login To Get Started! If You Don't Have An Account, Sign Up!</p>
-        <p style={secondStyle}>Look At Posts From Other Users! You Can Also Make Your Own.</p>
+        <p style={secondStyle}>This Website Is A Place Where Anyone Can Post About Any Person Or Event From History That They Found Interesting Or Significant</p>
+        <p style={secondStyle}>Login To Get Create Posts Or Comment! If You Don't Have An Account, Sign Up!</p>
         <p style={secondStyle}>Found Something Interesting? Spotted Misinfomration? Leave A Comment Below The Post With Your Thoughts.</p>
      
 
-        <h3 style={thirdHeaderStyle}>Posts:</h3>
+        <h1 style={thirdHeaderStyle}>User Posts:</h1>
         
         {displayPosts}
         </>

@@ -35,7 +35,7 @@ function handleSubmit(e) {
                 <ul>{errors && errors.map((err) => (
                          <li key={err}>{err}</li>
                      ))}</ul>
-            </form> : <strong>Login To Comment On Posts!</strong>}
+            </form> : <strong style={{paddingBottom:"15px", paddingLeft:"10px", fontSize:"155%"}}>Login To Comment On Posts!</strong>}
         </div>
     )
 }

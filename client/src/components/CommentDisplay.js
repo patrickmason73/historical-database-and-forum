@@ -2,10 +2,10 @@ import React, {useState, useContext} from "react";
 import { UserContext } from "./contexts/UserContext";
 
 const postHeaderStyle = {
-    padding: "20px",
+    padding: "12px",
     backgroundColor: "lightgray",
     display: "block",
-    borderStyle: "solid",
+    borderStyle: "groove",
 }
 
 function CommentDisplay({ comment, handleDeleteComment, handleUpdatedComments, post }) {

@@ -1,16 +1,6 @@
 import React, { useState } from "react";
 
-const formStyle = {
-    textAlign: "center"
-}
 
-const labelOneStyle = {
-    height:"35px", width: "500px" ,fontSize: "14pt"
-}
-
-const labelTwoStyle = {
-    width: "500px" ,fontSize: "10pt"
-}
 
 function AddPost({ addPost, errors }) {
     const [title, setTitle] = useState("")
@@ -26,13 +16,13 @@ function AddPost({ addPost, errors }) {
 
     return (
         <div>
-                <form onSubmit={handleSubmit} style={formStyle}>
+                <form onSubmit={handleSubmit} style={{textAlign: "center"}}>
                     <label>
                         <h2>Title:
                         <input 
                         type="text"
                         id="title"
-                        style={labelOneStyle}
+                        style={{height:"35px", width: "500px" ,fontSize: "14pt"}}
                         value={title}
                         onChange={(e) => setTitle(e.target.value)}
                         />
@@ -40,8 +30,8 @@ function AddPost({ addPost, errors }) {
                     </label>
                     <br />
                     <label>
-                        <h3>Content:
-                        <p>Write About A Significant Historical Event Or Person. Be Sure To Cite Your Sources.</p>
+                        <h2>Content:
+                        <p style={{fontSize:"75%"}}>Write About A Significant Historical Event Or Person. Be Sure To Cite Your Sources.</p>
                         <textarea 
                         rows="12"
                         cols="80"
@@ -50,7 +40,7 @@ function AddPost({ addPost, errors }) {
                         value={content}
                         onChange={(e) => setContent(e.target.value)}
                         />
-                        </h3>
+                        </h2>
                        
                     </label>
                     <br />
@@ -59,7 +49,7 @@ function AddPost({ addPost, errors }) {
                         <input 
                         type="text"
                         id="imgURL"
-                        style={labelTwoStyle}
+                        style={{width: "500px" ,fontSize: "10pt"}}
                         value={imgURL}
                         onChange={(e) => setImgURL(e.target.value)}
                         />

@@ -59,11 +59,11 @@ function UserDisplay({ posts }) {
         return (
 
         <article key={post.id} style={articleStyle}>
-            <article >
+            <article style={{borderStyle:"ridge"}}>
             <h1 style={postTitleStyle}>{post.title}</h1>
             <img src={post.img_url} alt={post.title} style={imgStyle}></img>
             <p style={postContentStyle}>{post.content}</p>
-            <strong>Your Comments:</strong>
+            <strong style={{paddingLeft:"8px"}}>Your Comments:</strong>
             <ol>
                 {postComments}
             </ol>

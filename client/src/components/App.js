@@ -198,9 +198,9 @@ function App() {
 
 
   return (
-    <div className="App">
+    <div >
       {/* <button onClick={consoleLogButton}>CONSOLE LOG</button> */}
-       <strong>{currentUser !== null && `Welcome back, ${currentUser.display_name}`}</strong>
+       <strong style={{fontSize:"150%"}}>{currentUser !== null && `Welcome back, ${currentUser.display_name}`}</strong>
       <Navbar logout={logout}/>
      <Routes>
       <Route path="/*" element={
