@@ -13,10 +13,11 @@ const linkStyles = {
   };
 
   const navStyle = {
-    height: "100px",
+    height: "75px",
     display: "flex",
     alignItems: "center",
     justifyContent: "center",
+    backgroundColor: "lightgray"
   }
 
 function Navbar({ logout }) {
