@@ -16,7 +16,6 @@ function App() {
   const navigate = useNavigate();
   
   const [posts, setPosts] = useState([])
-  // const [allComments, setAllComments] = useState([])
   const [errors, setErrors] = useState([])
 
 
@@ -25,12 +24,6 @@ function App() {
     .then((res) => res.json())
     .then(setPosts)
   }, []);
-
-  // useEffect(() => {
-  //   fetch("/comments")
-  //   .then((res) => res.json())
-  //   .then(setAllComments)
-  // }, [posts]);
 
   function logout() {
     fetch("/logout", {
@@ -69,10 +62,10 @@ function App() {
   })
   }
 
-  function consoleLogButton() {
-    console.log(posts)
-    console.log(currentUser)
-  }
+  // function consoleLogButton() {
+  //   console.log(posts)
+  //   console.log(currentUser)
+  // }
 
   function handleSignUp(username, password, passwordConfirmation, displayName, imgURL, bio) {
     
@@ -206,7 +199,7 @@ function App() {
 
   return (
     <div className="App">
-      <button onClick={consoleLogButton}>CONSOLE LOG</button>
+      {/* <button onClick={consoleLogButton}>CONSOLE LOG</button> */}
        <strong>{currentUser !== null && `Welcome back, ${currentUser.display_name}`}</strong>
       <Navbar logout={logout}/>
      <Routes>

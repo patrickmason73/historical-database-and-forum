@@ -10,12 +10,6 @@ function Login() {
     const [password, setPassword] = useState("");
     const [errors, setErrors] = useState([]);
 
-  //   const postsDisplay = posts.map((post) => {
-  //     if (post.users.find(user => user.id === currentUser.id)) {
-  //         return post
-  //     }
-  // })
-
     function handleSubmit(e) {
       e.preventDefault();
       fetch("/login", {

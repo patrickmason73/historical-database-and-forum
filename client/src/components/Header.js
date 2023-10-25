@@ -1,4 +1,4 @@
-import React, {useState} from "react";
+import React from "react";
 import Comments from "./Comments";
 import AddComment from "./AddComment";
 
@@ -47,41 +47,22 @@ const thirdHeaderStyle = {
     paddingLeft: "5px"
 }
 
-function Header({ posts, filterComment, updatedComments, addComment, errors, setErrors }) {
+function Header({ posts, filterComment, updatedComments, addComment, errors }) {
 
-// const [addingComment, setAddingComment] = useState(false)
 
     const displayPosts = 
         posts.map((post) => {
-            // const [comments, setComments] = useState(post.comments)
             
             function handleUpdatedComments(newComment, comment) {
                 updatedComments(newComment, post.id, comment)
-            //    const newComments = comments.map((comment) => {
-            //         if (comment.id === newComment.id) {
-            //             return newComment;
-            //         }
-            //         else {
-            //             return comment;
-            //         }
-            //     })
-            //     setComments(newComments)
             }
 
             function handleDeleteComment(comment) {
                 filterComment(comment, post.id)
-                // fetch(`/comments/${comment.id}`, {
-                //     method: "DELETE",
-                // }).then((res) => {
-                //     if (res.ok) {
-                         
-                //     }
-                // })
             }
 
             function handleAddComment(newComment) {
                 addComment(newComment, post.id)
-                // setComments([newComment, ...comments])
             }
 
                 return (

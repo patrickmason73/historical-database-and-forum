@@ -16,10 +16,7 @@ function CommentDisplay({ comment, handleDeleteComment, handleUpdatedComments, p
  const [editing, setEditing] = useState(false)
  const [newComment, setNewComment] = useState(comment.content)
 
-//   const commentUser = post.users.includes((user) => user.id === comment.user_id)
-    
-    // const currentComment = allComments.find((e) => e.id === comment.id)
-    const commentUser = post.users.find((user) => {if (user !== null) {return (user.id === comment.user_id)} else {return null}})
+ const commentUser = post.users.find((user) => {if (user !== null) {return (user.id === comment.user_id)} else {return null}})
 
  function handleSubmit(e, comment) {
     e.preventDefault();
@@ -31,8 +28,9 @@ function CommentDisplay({ comment, handleDeleteComment, handleUpdatedComments, p
         <div>
             {commentUser !== null ? 
             <article style={postHeaderStyle}>
-            <h3>{commentUser.display_name}</h3>
-                    <p>{comment.content}</p>
+            <h1>{commentUser.display_name}<img src={commentUser.img_url} alt="pfp" style={{float: "left", height: "21px", width: "21px"}}/></h1>
+                    
+                    <p style={{float: "bottom"}}>{comment.content}</p>
             
            
                     {(currentUser !== null && currentUser.id === commentUser.id) && <button onClick={() => handleDeleteComment(comment)}>Delete Comment</button>}
@@ -55,7 +53,6 @@ function CommentDisplay({ comment, handleDeleteComment, handleUpdatedComments, p
                             <button type="submit">UPDATE COMMENT</button>
                     </form>
                         : null}
-            {/* <button onClick={() => consoleLog(comment)}>console.log</button> */}
             </article>
             : null}
         </div>

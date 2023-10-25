@@ -36,18 +36,6 @@ const articleStyle = {
 
 function UserDisplay({ posts }) {
     const {currentUser} = useContext(UserContext)
-    // const [userCommments, setUserComments] = useState([currentUser.comments])
-
-    // useEffect(() => {
-    //     setUserComments([currentUser.comments])
-    // }, [currentUser.comments])
-
-    // const postsToDisplay = currentUser.posts.reduce((acc, current) => {
-    //     if(!acc.find((item) => item.id === current.id)) {
-    //         acc.push(current);
-    //     }
-    //     return acc;
-    // }, [])
 
     const postsDisplay = posts.map((post) => {
         if (post.users.find(user => user.id === currentUser.id)) {
@@ -89,10 +77,10 @@ function UserDisplay({ posts }) {
     return (
         <div>
             <strong style={headerStyle}>Display Name: {currentUser.display_name}</strong>
+            <img src={currentUser.img_url} alt="pfp" style={{display: "block", marginLeft: "auto", marginRight: "auto", width: "30%"}}/>
             <br />
            <strong style={postHeaderStyle}> Here are the posts you have commented on:</strong>
             {currentUser.comments !== null && displayPosts}
-            {/* <button onClick={() => console.log(currentUser.comments)}>consoleLog</button> */}
         </div>
     )
 
