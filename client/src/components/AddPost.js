@@ -16,21 +16,22 @@ function AddPost({ addPost, errors }) {
 
     return (
         <div>
-                <form onSubmit={handleSubmit}>
+                <form onSubmit={handleSubmit} style={{textAlign: "center"}}>
                     <label>
-                        Title
+                        <h2>Title:
                         <input 
                         type="text"
                         id="title"
+                        style={{height:"35px", width: "500px" ,fontSize: "14pt"}}
                         value={title}
                         onChange={(e) => setTitle(e.target.value)}
                         />
+                        </h2>
                     </label>
                     <br />
                     <label>
-                        Content: 
-                        <br />
-                        Write About A Significant Historical Event Or Person. Be Sure To Cite Your Sources.
+                        <h2>Content:
+                        <p style={{fontSize:"75%"}}>Write About A Significant Historical Event Or Person. Be Sure To Cite Your Sources.</p>
                         <textarea 
                         rows="12"
                         cols="80"
@@ -39,6 +40,8 @@ function AddPost({ addPost, errors }) {
                         value={content}
                         onChange={(e) => setContent(e.target.value)}
                         />
+                        </h2>
+                       
                     </label>
                     <br />
                     <label>
@@ -46,6 +49,7 @@ function AddPost({ addPost, errors }) {
                         <input 
                         type="text"
                         id="imgURL"
+                        style={{width: "500px" ,fontSize: "10pt"}}
                         value={imgURL}
                         onChange={(e) => setImgURL(e.target.value)}
                         />

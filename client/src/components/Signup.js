@@ -19,35 +19,39 @@ function Signup ({ errors, handleSignUp }) {
     }
 
     return (
-        <form onSubmit={handleSubmit}>
+        <form onSubmit={handleSubmit} style={{textAlign: "center"}}>
             <label>
-                Username
-                <input 
+               <h3>Username:
+               <input 
                 type="text"
                 id="username"
                 value={username}
                 onChange={(e) => setUsername(e.target.value)}
                 />
+               </h3>
+                
             </label>
-            <br />
             <label>
-                Password
+                <h3>Password:
                 <input 
                 type="password"
                 id="password"
                 value={password}
                 onChange={(e) => setPassword(e.target.value)}
                 />
+                </h3>
+              
             </label>
-            <br />
             <label>
-                Password Confirmation
-                <input 
+               <h3>Password Confirmation:
+               <input 
                 type="password"
                 id="password_confirmation"
                 value={passwordConfirmation}
                 onChange={(e) => setPasswordConfirmation(e.target.value)}
                 />
+               </h3>
+
             </label>
             <br />
             <label>
@@ -61,23 +65,27 @@ function Signup ({ errors, handleSignUp }) {
             </label>
             <br />
             <label>
-                Bio:
-                <br />
-                <textarea 
-                rows="4"
-                cols="60"
-                id="bio"
-                value={bio}
-                onChange={(e) => setBio(e.target.value)}
-                />
+            <h2>Bio:
+              <p style={{fontSize:"75%"}}>Write A Little About Yourself</p>
+                 <textarea 
+                 rows="12"
+                 cols="80"
+                 type="text"
+                 id="content"
+                 value={bio}
+                 onChange={(e) => setBio(e.target.value)}
+                 />
+             </h2>
+
             </label>
             <br />
             <label>
-                Profile Picture URL
+                Profile Picture URL:
                 <input 
                 type="text"
                 id="imgURL"
                 value={imgURL}
+                style={{width:"400px"}}
                 onChange={(e) => setImgURL(e.target.value)}
                 />
             </label>
