@@ -74,6 +74,34 @@ function App() {
     console.log(currentUser)
   }
 
+  function handleSignUp(username, password, passwordConfirmation, displayName, imgURL, bio) {
+    
+    fetch("/signup", {
+        method: "POST",
+        headers: {
+            "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+            username,
+            password,
+            password_confirmation: passwordConfirmation,
+            display_name: displayName,
+            img_url: imgURL,
+            bio,
+        }),
+    }).then((res) => {
+        if (res.ok) {
+            res.json().then((user) => {
+              setCurrentUser(user)
+              setErrors([])
+              navigate("/")
+            })
+        } else {
+            res.json().then((err) => setErrors(err.errors))
+        }
+    })
+  }
+
   function addComment(newComment, postId) { 
     const postToUpdate = posts.find((post) => post.id === postId)
     fetch('/comments', {
@@ -195,7 +223,7 @@ function App() {
         }>
       </Route>
 
-      <Route path="/signup" element={<Signup />}>
+      <Route path="/signup" element={<Signup errors={errors} handleSignUp={handleSignUp}/>}>
       </Route>
 
       <Route path="/posts/new" element={(currentUser ? <AddPost addPost={addPost} errors={errors} /> : <h1>Log in or sign up to create posts!</h1>)}>

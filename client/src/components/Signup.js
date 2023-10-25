@@ -1,10 +1,9 @@
-import React, { useState, useContext } from "react"
-import { UserContext } from "./contexts/UserContext"
+import React, { useState } from "react"
 
 
 
-function Signup () {
-    const {setCurrentUser} = useContext(UserContext)
+function Signup ({ errors, handleSignUp }) {
+
 
     const [username, setUsername] = useState("")
     const [password, setPassword] = useState("")
@@ -12,31 +11,11 @@ function Signup () {
     const [displayName, setDisplayName] = useState("")
     const [imgURL, setImgURL] = useState("")
     const [bio, setBio] = useState("")
-    const [errors, setErrors] = useState([])
+
 
     function handleSubmit(e) {
         e.preventDefault()
-        setErrors([])
-        fetch("/signup", {
-            method: "POST",
-            headers: {
-                "Content-Type": "application/json",
-            },
-            body: JSON.stringify({
-                username,
-                password,
-                password_confirmation: passwordConfirmation,
-                display_name: displayName,
-                img_url: imgURL,
-                bio,
-            }),
-        }).then((res) => {
-            if (res.ok) {
-                res.json().then((user) => setCurrentUser(user))
-            } else {
-                res.json().then((err) => setErrors(err.errors))
-            }
-        })
+        handleSignUp(username, password, passwordConfirmation, displayName, imgURL, bio)
     }
 
     return (
@@ -104,7 +83,7 @@ function Signup () {
             </label>
             <br />
             <button type="submit">CREATE ACCOUNT</button>
-            <ul>{errors.map((err) => (
+            <ul>{errors && errors.map((err) => (
                 <li key={err}>{err}</li>
             ))}</ul>
         </form>
