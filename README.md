@@ -8,6 +8,8 @@ This project is a rails api that hosts a database of posts about historical even
 
 ## Usage Demonstration GIF
 
+![GIF](https://github.com/patrickmason73/rails-project-history/blob/main/railsProjectGif.gif)
+
 ## Requirements
 
 - Ruby 2.7.4
