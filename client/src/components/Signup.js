@@ -90,7 +90,7 @@ function Signup ({ errors, handleSignUp }) {
                 />
             </label>
             <br />
-            <button type="submit">CREATE ACCOUNT</button>
+            <button type="submit" style={{padding: "8px"}}>CREATE ACCOUNT</button>
             <ul>{errors && errors.map((err) => (
                 <li key={err}>{err}</li>
             ))}</ul>
