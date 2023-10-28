@@ -85,7 +85,7 @@ function Signup ({ errors, handleSignUp }) {
                 type="text"
                 id="imgURL"
                 value={imgURL}
-                style={{width:"400px", paddingBottom: "8px"}}
+                style={{width:"400px"}}
                 onChange={(e) => setImgURL(e.target.value)}
                 />
             </label>
