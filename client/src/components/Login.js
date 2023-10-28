@@ -33,7 +33,7 @@ function Login() {
     return (
       <>
       { currentUser === null ?
-        <form onSubmit={handleSubmit}>
+        <form onSubmit={handleSubmit} style={{padding: "10px"}}>
             <label> 
                 Username
                 <input 
