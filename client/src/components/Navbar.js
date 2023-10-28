@@ -17,7 +17,8 @@ const linkStyles = {
     display: "flex",
     alignItems: "center",
     justifyContent: "center",
-    backgroundColor: "lightgray"
+    backgroundColor: "lightgray",
+    padding: "10px"
   }
 
 function Navbar({ logout }) {
