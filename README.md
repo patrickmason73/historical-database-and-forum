@@ -17,8 +17,8 @@ This project is a rails api that hosts a database of posts about historical even
 
 ## Setup
 
-Run 'bundle install'
-Run 'npm install --prefix client'
+- Run 'bundle install'
+- Run 'npm install --prefix client'
 
 You can use the following commands to run the application locally:
 
