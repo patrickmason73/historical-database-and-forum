@@ -85,12 +85,12 @@ function Signup ({ errors, handleSignUp }) {
                 type="text"
                 id="imgURL"
                 value={imgURL}
-                style={{width:"400px"}}
+                style={{width:"400px", paddingBottom: "8px"}}
                 onChange={(e) => setImgURL(e.target.value)}
                 />
             </label>
             <br />
-            <button type="submit" style={{padding: "8px"}}>CREATE ACCOUNT</button>
+            <button type="submit">CREATE ACCOUNT</button>
             <ul>{errors && errors.map((err) => (
                 <li key={err}>{err}</li>
             ))}</ul>
