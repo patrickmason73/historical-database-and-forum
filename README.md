@@ -1,4 +1,6 @@
-# Rails Project: History of Events/People, posted by anonymous users
+# Rails Project: History of Events/People
+
+Posted by anonymous Users
 
 ## Description
 
