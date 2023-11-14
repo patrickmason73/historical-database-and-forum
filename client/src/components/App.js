@@ -62,11 +62,6 @@ function App() {
   })
   }
 
-  // function consoleLogButton() {
-  //   console.log(posts)
-  //   console.log(currentUser)
-  // }
-
   function handleSignUp(username, password, passwordConfirmation, displayName, imgURL, bio) {
     
     fetch("/signup", {
@@ -199,7 +194,6 @@ function App() {
 
   return (
     <div >
-      {/* <button onClick={consoleLogButton}>CONSOLE LOG</button> */}
        <strong style={{fontSize:"150%"}}>{currentUser !== null && `Welcome back, ${currentUser.display_name}`}</strong>
       <Navbar logout={logout}/>
      <Routes>

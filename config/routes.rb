@@ -12,5 +12,5 @@ Rails.application.routes.draw do
   post "/login", to: "sessions#create"
   delete "/logout", to: "sessions#destroy"
 
-  get "top_three_users", to: 'posts#top_three'
+  # get "top_three_users", to: 'posts#top_three'
 end

@@ -1,5 +1,5 @@
 class PostsController < ApplicationController
- skip_before_action :authorize, only: [:index, :top_three, :show]
+ skip_before_action :authorize, only: [:index, :show]
     def index
         render json: Post.all, include: [:comments, :users]
     end
@@ -14,14 +14,14 @@ class PostsController < ApplicationController
         render json: post, include: [:comments, :users], status: :created
     end
 
-    def top_three
-        users = User.includes(:comments, :posts).all
-        sorted_users = users.sort_by { |user| -user.comments.length }
-        three_users = sorted_users[0..2]
-        posts = three_users.map { |user| user.posts }
-        unique_posts = posts.flatten(1).uniq 
-        render json: unique_posts
-    end
+    # def top_three
+    #     users = User.includes(:comments, :posts).all
+    #     sorted_users = users.sort_by { |user| -user.comments.length }
+    #     three_users = sorted_users[0..2]
+    #     posts = three_users.map { |user| user.posts }
+    #     unique_posts = posts.flatten(1).uniq 
+    #     render json: unique_posts
+    # end
 
     private
 
