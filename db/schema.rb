@@ -74,6 +74,11 @@ ActiveRecord::Schema.define(version: 2024_01_04_183426) do
     t.index ["user_id"], name: "index_comments_on_user_id"
   end
 
+  create_table "new_posts", force: :cascade do |t|
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+  end
+
   create_table "post_comments", force: :cascade do |t|
     t.text "content"
     t.bigint "capstone_user_id", null: false
