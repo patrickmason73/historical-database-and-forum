@@ -14,6 +14,11 @@ class PostsController < ApplicationController
         render json: post, include: [:comments, :users], status: :created
     end
 
+    def search
+        posts = Post.all.filter { |post| post.title.capitalize.include?(params[:title].capitalize) }
+        render json: posts
+    end
+
     # def top_three
     #     users = User.includes(:comments, :posts).all
     #     sorted_users = users.sort_by { |user| -user.comments.length }
