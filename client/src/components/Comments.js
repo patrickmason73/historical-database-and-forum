@@ -15,14 +15,14 @@ const strongStyle = {
     paddingLeft: "7px"
 }
 
-function Comments({ post, handleUpdatedComments, handleDeleteComment, errors }) {
+function Comments({ post, handleUpdatedComments, handleDeleteComment, errors, handleAddComment }) {
 
 
 const displayComments = post.comments.map((comment) => {
     if (comment !== null) {
         return (
         <div key={comment.id}>
-            <CommentDisplay comment={comment} errors={errors} post={post} handleDeleteComment={handleDeleteComment} handleUpdatedComments={handleUpdatedComments}/>
+            <CommentDisplay comment={comment} errors={errors} post={post} handleDeleteComment={handleDeleteComment} handleUpdatedComments={handleUpdatedComments} handleAddComment={handleAddComment}/>
         </div>
     )} else {return null}
 })

@@ -43,13 +43,13 @@ function Navbar({ logout }) {
                  {currentUser ? "My Account" : "Login"}
                 </NavLink>
                 
-                <NavLink to="/signup"
+                {currentUser ? null : <NavLink to="/signup"
               
                 style={linkStyles}
                
                 >
                  Sign up
-                </NavLink>
+                </NavLink>}
                 
                 <NavLink to="/posts/new"
               

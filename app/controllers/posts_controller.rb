@@ -1,7 +1,15 @@
 class PostsController < ApplicationController
  skip_before_action :authorize, only: [:index, :show]
     def index
-        render json: Post.all, include: [:comments, :users]
+        render json: Post.all, include: {
+            users: {},
+            comments: {
+                include: [
+                    :user,
+                    :replies
+                ]
+            }
+        }
     end
 
     def show

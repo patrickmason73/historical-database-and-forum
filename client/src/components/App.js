@@ -90,9 +90,9 @@ function App() {
     })
   }
 
-  function addComment(newComment, postId) { 
+  function addComment(newComment, postId, parentId) { 
     const postToUpdate = posts.find((post) => post.id === postId)
-    fetch('/comments', {
+    fetch(`/comments`, {
       method: "POST",
       headers: {
           "Content-type": "application/json",
@@ -101,30 +101,47 @@ function App() {
           content: newComment,
           user_id: currentUser.id,
           post_id: postId,
+          parent_comment_id: parentId,
+          replies: [],
       }),
   })
   .then((res) => {
       if (res.ok) {
           res.json().then((data) => {
             const updatedPosts = posts.map((post) => {
-              if (post === postToUpdate)
-              return {
-                ...postToUpdate,
-                comments: [...postToUpdate.comments, data],
-                users: [...postToUpdate.users, currentUser],
+              if (post === postToUpdate) {
+                // If the new comment is a parent comment, append it to the comments array
+                if (!parentId) {
+                  return {
+                    ...postToUpdate,
+                    comments: [...postToUpdate.comments, data],
+                    users: [...postToUpdate.users, currentUser],
+                  };
+                }
+                // If the new comment is a reply, find its parent comment and append it to the replies array
+                return {
+                  ...postToUpdate,
+                  comments: postToUpdate.comments.map((comment) => {
+                    if (comment.id === parentId) {
+                      return {
+                        ...comment,
+                        replies: [...comment.replies, data],
+                      };
+                    }
+                    return comment;
+                  }),
+                };
               }
-              else {return post}
-            })
-            setPosts(updatedPosts)
-            setErrors([])
-          })
-
-      } else {
-          res.json().then((err) => setErrors(err.errors))
-      }
-  })
-
-  }
+              return post;
+            });
+            setPosts(updatedPosts);
+            setErrors([]);
+          });
+        } else {
+          res.json().then((err) => setErrors(err.errors));
+        }
+      });
+    }
 
   function updatedComments(newComment, postId, comment) {
     const postToUpdate = posts.find((post) => post.id === postId)
@@ -140,23 +157,33 @@ function App() {
   .then((r) => r.json())
   .then((data) => {
     const updatedPosts = posts.map((post) => {
-      if (post === postToUpdate)
-      return {
-        ...postToUpdate,
-        comments: post.comments.map((comment) => {
-          if (comment.id === data.id) {
-            return data;
-        }
-        else {
-            return comment;
-        }
-        })
+      if (post === postToUpdate) {
+        return {
+          ...postToUpdate,
+          comments: post.comments.map((c) => {
+            // If the updated comment is a parent comment or a reply, replace it with the updated data
+            if (c.id === data.id) {
+              return data;
+            } else if (c.replies && c.replies.length > 0) {
+              // If the comment has replies, check if the updated comment is among its replies
+              return {
+                ...c,
+                replies: c.replies.map((reply) => {
+                  if (reply.id === data.id) {
+                    return data;
+                  }
+                  return reply;
+                }),
+              };
+            }
+            return c;
+          }),
+        };
       }
-      else {return post}
-    })
-    setPosts(updatedPosts)
-  })
-    
+      return post;
+    });
+    setPosts(updatedPosts);
+  });
 }
 
   function filterComment(commentDelete, postId) {
@@ -164,37 +191,50 @@ function App() {
     fetch(`/comments/${commentDelete.id}`, {
       method: "DELETE",
   }).then((res) => {
-      if (res.ok) {
-        const updatedPosts = posts.map((post) => {
-          if (post === postToUpdate)
+    if (res.ok) {
+      const updatedPosts = posts.map((post) => {
+        if (post === postToUpdate) {
+          const updatedComments = post.comments.filter((comment) => {
+            // Exclude the deleted comment and its replies
+            if (comment.id === commentDelete.id || comment.parent_comment_id === commentDelete.id) {
+              return false;
+            }
+            // Filter out replies of the comment being deleted
+            if (comment.replies) {
+              comment.replies = comment.replies.filter((reply) => reply.id !== commentDelete.id);
+            }
+            return true;
+          });
+
+          // Filter out the deleted comment's user from the users array
+          const updatedUsers = post.users.filter((user) => {
+            const hasComments = updatedComments.some(
+              (comment) => comment.user_id === user.id
+            );
+            return hasComments || user.id === commentDelete.user_id;
+          });
+
           return {
             ...postToUpdate,
-            comments: post.comments.filter((comment) => {
-              return comment.id !== commentDelete.id
-            }),
-            users: post.users.filter((user) => {
-             const postComments = post.comments.filter((comment) => {
-              return comment.id !== commentDelete.id
-            })
-              if (postComments.find((e) => e.user_id === user.id)) { 
-                return user
-              }
-              else {return null}
-            })
-          }
-          else {return post}
-        })
-        setPosts(updatedPosts)
-        setErrors([])
-      }
-      else {res.json().then((err) => setErrors(err.errors))}
-  })}
-
+            comments: updatedComments,
+            users: updatedUsers,
+          };
+        }
+        return post;
+      });
+      setPosts(updatedPosts);
+      setErrors([]);
+    } else {
+      res.json().then((err) => setErrors(err.errors));
+    }
+  });
+}
 
 
   return (
     <div >
        <strong style={{fontSize:"150%"}}>{currentUser !== null && `Welcome back, ${currentUser.display_name}`}</strong>
+       {/* <button onClick={console.log(posts)}>console</button> */}
       <Navbar logout={logout}/>
      <Routes>
       <Route path="/*" element={

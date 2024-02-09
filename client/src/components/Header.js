@@ -5,7 +5,8 @@ import AddComment from "./AddComment";
 const headerStyle = {
     display: "grid",
     placeItems: "center",
-    fontSize: "200%"
+    fontSize: "200%",
+    backgroundColor: 'lightgray'
 }
 
 const imgStyle = {
@@ -42,9 +43,9 @@ const secondStyle = {
 
 const thirdHeaderStyle = {
     display: "grid",
-    placeItems: "start",
-    fontSize: "175%",
-    paddingLeft: "5px"
+    placeItems: "center",
+    fontSize: "200%",
+    paddingLeft: "5px",
 }
 
 function Header({ posts, filterComment, updatedComments, addComment, errors }) {
@@ -61,8 +62,8 @@ function Header({ posts, filterComment, updatedComments, addComment, errors }) {
                 filterComment(comment, post.id)
             }
 
-            function handleAddComment(newComment) {
-                addComment(newComment, post.id)
+            function handleAddComment(newComment, postId, parentId) {
+                addComment(newComment, postId, parentId)
             }
 
                 return (
@@ -74,7 +75,7 @@ function Header({ posts, filterComment, updatedComments, addComment, errors }) {
                     <br />
                     <AddComment post={post} handleAddComment={handleAddComment} errors={errors} />
                     <br/>
-                    {post.comments ? <Comments errors={errors} post={post} handleUpdatedComments={handleUpdatedComments} handleDeleteComment={handleDeleteComment}/> : null}
+                    {post.comments ? <Comments errors={errors} post={post} handleUpdatedComments={handleUpdatedComments} handleDeleteComment={handleDeleteComment} handleAddComment={handleAddComment}/> : null}
                     </article>
                  </article>
             )})
@@ -83,9 +84,9 @@ function Header({ posts, filterComment, updatedComments, addComment, errors }) {
         <>
         <p style={headerStyle}><strong>HISTORICAL EVENTS AND PEOPLE DATABASE</strong></p>
 
-        <p style={secondStyle}>This Website Is A Place Where Anyone Can Post About Any Person Or Event From History That They Found Interesting Or Significant</p>
-        <p style={secondStyle}>Login To Get Create Posts Or Comment! If You Don't Have An Account, Sign Up!</p>
-        <p style={secondStyle}>Found Something Interesting? Spotted Misinfomration? Leave A Comment Below The Post With Your Thoughts.</p>
+        {/* <p style={secondStyle}>This Website Is A Place Where Anyone Can Post About Any Person Or Event From History That They Found Interesting Or Significant</p> */}
+        {/* <p style={secondStyle}>Login To Get Create Posts Or Comment! If You Don't Have An Account, Sign Up!</p>
+        <p style={secondStyle}>Found Something Interesting? Spotted Misinfomration? Leave A Comment Below The Post With Your Thoughts.</p> */}
      
 
         <h1 style={thirdHeaderStyle}>User Posts:</h1>

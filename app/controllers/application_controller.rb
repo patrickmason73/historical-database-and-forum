@@ -6,6 +6,10 @@ class ApplicationController < ActionController::API
     
   before_action :authorize
 
+  def index
+    render file: 'public/index.html'
+  end
+
 private
 
     def authorize

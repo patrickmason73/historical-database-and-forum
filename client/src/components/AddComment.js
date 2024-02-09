@@ -1,14 +1,15 @@
 import React, {useState, useContext} from "react";
 import { UserContext } from "./contexts/UserContext";
 
-function AddComment({ handleAddComment, errors}) {
+function AddComment({ handleAddComment, errors, post}) {
     const {currentUser} = useContext(UserContext)
     const [newComment, setNewComment] = useState("")
 
 
 function handleSubmit(e) {
     e.preventDefault()
-    handleAddComment(newComment)
+    const parentId = null
+    handleAddComment(newComment, post.id, parentId)
     console.log(newComment)
     setNewComment("")
 }
