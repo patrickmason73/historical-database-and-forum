@@ -6,7 +6,11 @@ const headerStyle = {
     display: "grid",
     placeItems: "center",
     fontSize: "200%",
-    backgroundColor: 'lightgray'
+    backgroundColor: 'lightgray',
+    marginTop: '2px',
+    marginBottom: '30px',
+    borderStyle: 'solid',
+    borderRight: 'none'
 }
 
 const imgStyle = {
@@ -22,7 +26,7 @@ const titleStyle = {
 }
 
 const postHeaderStyle = {
-    margin: 0,
+    marginLeft: '10px',
     padding: "20px",
     backgroundColor: "lightgray",
     display: "block",
@@ -43,9 +47,11 @@ const secondStyle = {
 
 const thirdHeaderStyle = {
     display: "grid",
-    placeItems: "center",
+    placeItems: 'start',
     fontSize: "200%",
     paddingLeft: "5px",
+    marginLeft: '10px',
+    marginTop: '2px'
 }
 
 function Header({ posts, filterComment, updatedComments, addComment, errors }) {
@@ -89,7 +95,7 @@ function Header({ posts, filterComment, updatedComments, addComment, errors }) {
         <p style={secondStyle}>Found Something Interesting? Spotted Misinfomration? Leave A Comment Below The Post With Your Thoughts.</p> */}
      
 
-        <h1 style={thirdHeaderStyle}>User Posts:</h1>
+        {/* <h1 style={thirdHeaderStyle}>User Posts:</h1> */}
         
         {displayPosts}
         </>

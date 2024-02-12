@@ -16,7 +16,7 @@ function AddPost({ addPost, errors }) {
 
     return (
         <div>
-                <form onSubmit={handleSubmit} style={{textAlign: "center"}}>
+                <form onSubmit={handleSubmit} style={{textAlign: "center", marginLeft: '20px'}}>
                     <label>
                         <h2>Title:
                         <input 
@@ -45,7 +45,7 @@ function AddPost({ addPost, errors }) {
                     </label>
                     <br />
                     <label>
-                        Include An Image URL Here
+                       <b> Include An Image URL Here:</b>
                         <input 
                         type="text"
                         id="imgURL"
@@ -56,7 +56,7 @@ function AddPost({ addPost, errors }) {
                     </label>
                     <br/>
                     <br/>
-                    <button type="submit">CREATE POST</button>
+                    <button type="submit" style={{width: "150px", padding: "5px", margin: "10px 6px 6px", background: "blue", color: "white", marginBottom: '30px', cursor: 'pointer'}}>CREATE POST</button>
                     <ul>{errors && errors.map((err) => (
                          <li key={err}>{err}</li>
                      ))}</ul>

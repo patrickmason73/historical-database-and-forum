@@ -33,9 +33,9 @@ function Login() {
     return (
       <>
       { currentUser === null ?
-        <form onSubmit={handleSubmit} style={{padding: "10px"}}>
-            <label> 
-                Username
+        <form onSubmit={handleSubmit} style={{padding: "10px", marginLeft: '20px'}}>
+            <label style={{margin: '5px'}}> 
+                <b>Username: </b>
                 <input 
                 type="text"
                 id="username"
@@ -44,8 +44,8 @@ function Login() {
                 />
             </label>
 
-            <label>
-                Password
+            <label style={{margin: '5px'}}>
+               <b> Password: </b>
                 <input 
                 type="password"
                 id="password"
@@ -55,7 +55,7 @@ function Login() {
             </label>
             <br />
 
-            <button type="submit">Login</button>
+            <button type="submit" style={{ width: "100px", padding: "5px", margin: "10px 6px 6px", background: "blue", color: "white", display: "block", marginBottom: '30px', cursor: 'pointer'}}>Login</button>
             <ul>{errors.map((err) => (
                 <li key={err}>{err}</li>
             ))}</ul>

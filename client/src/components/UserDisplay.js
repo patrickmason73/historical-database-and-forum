@@ -75,11 +75,11 @@ function UserDisplay({ posts }) {
 })
 
     return (
-        <div>
+        <div style={{marginLeft: '10px'}}>
             <strong style={headerStyle}>Display Name: {currentUser.display_name}</strong>
             <img src={currentUser.img_url} alt="pfp" style={{display: "block", marginLeft: "auto", marginRight: "auto", width: "30%"}}/>
             <br />
-           <strong style={postHeaderStyle}> Here are the posts you have commented on:</strong>
+           <strong style={postHeaderStyle}> Posts you have commented on:</strong>
             {currentUser.comments !== null && displayPosts}
         </div>
     )

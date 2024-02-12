@@ -19,7 +19,7 @@ function Signup ({ errors, handleSignUp }) {
     }
 
     return (
-        <form onSubmit={handleSubmit} style={{textAlign: "center"}}>
+        <form onSubmit={handleSubmit} style={{textAlign: "center", marginLeft: '50px'}}>
             <label>
                <h3>Username:
                <input 
@@ -90,7 +90,7 @@ function Signup ({ errors, handleSignUp }) {
                 />
             </label>
             <br />
-            <button type="submit">CREATE ACCOUNT</button>
+            <button type="submit" style={{width: "150px", padding: "5px", margin: "10px 6px 6px", background: "blue", color: "white", marginBottom: '30px', cursor: 'pointer'}}>CREATE ACCOUNT</button>
             <ul>{errors && errors.map((err) => (
                 <li key={err}>{err}</li>
             ))}</ul>

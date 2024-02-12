@@ -9,16 +9,27 @@ const linkStyles = {
     background: "blue",
     textDecoration: "none",
     color: "white",
-    alignItems: "center",
+    display: "block",
+    marginBottom: '40px',
+    marginTop: '10px',
+    borderRadius: '10px',
+    textAlign: 'center',
+    fontWeight: 'bold',
+    fontSize: '120%'
   };
 
   const navStyle = {
-    height: "75px",
+    position: "fixed", 
+    top: 0,
+    left: 0, 
+    height: "100vh", 
     display: "flex",
+    flexDirection: "column",
     alignItems: "center",
-    justifyContent: "center",
     backgroundColor: "lightgray",
-    padding: "10px"
+    padding: "10px",
+    borderStyle: 'groove',
+    marginRight: '5px'
   }
 
 function Navbar({ logout }) {
@@ -59,7 +70,7 @@ function Navbar({ logout }) {
                 Add Post
               </NavLink>
 
-                {currentUser ? <NavLink to="/logout" onClick={logout}>
+                {currentUser ? <NavLink to="/logout" onClick={logout} style={{fontSize: '110%', fontWeight: 'bold'}}>
                 Log Out
                 </NavLink> : null}
                 </nav>

@@ -232,8 +232,8 @@ function App() {
 
 
   return (
-    <div >
-       <strong style={{fontSize:"150%"}}>{currentUser !== null && `Welcome back, ${currentUser.display_name}`}</strong>
+    <div style={{paddingLeft: '200px', position: 'absolute'}}>
+       <strong style={{fontSize:"150%", marginLeft: '20px'}}>{currentUser !== null && `Welcome back, ${currentUser.display_name}`}</strong>
        {/* <button onClick={console.log(posts)}>console</button> */}
       <Navbar logout={logout}/>
      <Routes>
@@ -253,7 +253,7 @@ function App() {
       <Route path="/signup" element={<Signup errors={errors} handleSignUp={handleSignUp}/>}>
       </Route>
 
-      <Route path="/posts/new" element={(currentUser ? <AddPost addPost={addPost} errors={errors} /> : <h1>Log In Or Sign Up To Create Posts!</h1>)}>
+      <Route path="/posts/new" element={(currentUser ? <AddPost addPost={addPost} errors={errors} /> : <h1 style={{marginLeft: '20px'}}>Log In Or Sign Up To Create Posts!</h1>)}>
       </Route>
 
      </Routes>
