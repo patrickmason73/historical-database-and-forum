@@ -9,8 +9,8 @@ const headerStyle = {
     backgroundColor: 'lightgray',
     marginTop: '2px',
     marginBottom: '30px',
-    borderStyle: 'solid',
-    borderRight: 'none'
+    // borderStyle: 'solid',
+    // borderRight: 'none'
 }
 
 const imgStyle = {
@@ -29,14 +29,17 @@ const titleStyle = {
 const postHeaderStyle = {
     marginLeft: '10px',
     padding: "20px",
-    backgroundColor: "lightgray",
+    backgroundColor: "ash",
     display: "block",
 }
 
 const secondHeaderStyle = {
     display: "grid",
     backgroundColor: "#add8e6",
-    padding: "20px"
+    padding: "20px",
+    borderStyle: 'solid',
+    borderColor: 'black',
+    borderRadius: '10px'
 }
 
 const secondStyle = {
@@ -55,22 +58,22 @@ const thirdHeaderStyle = {
     marginTop: '2px'
 }
 
-function Header({ posts, filterComment, updatedComments, addComment, errors }) {
+function Header({ posts, filterComment, updatedComments, addComment }) {
 
 
     const displayPosts = 
         posts.map((post) => {
             
-            function handleUpdatedComments(newComment, comment) {
-                updatedComments(newComment, post.id, comment)
+            function handleUpdatedComments(newComment, post, comment, setErrors) {
+                updatedComments(newComment, post.id, comment, setErrors)
             }
 
-            function handleDeleteComment(comment) {
-                filterComment(comment, post.id)
+            function handleDeleteComment(comment, post, setErrors) {
+                filterComment(comment, post.id, setErrors)
             }
 
-            function handleAddComment(newComment, postId, parentId) {
-                addComment(newComment, postId, parentId)
+            function handleAddComment(newComment, postId, parentId, setErrors) {
+                addComment(newComment, postId, parentId, setErrors)
             }
 
                 return (
@@ -80,9 +83,9 @@ function Header({ posts, filterComment, updatedComments, addComment, errors }) {
                     <img src={post.img_url} alt={post.img_url} style={imgStyle}></img>
                     <p>{post.content}</p>
                     <br />
-                    <AddComment post={post} handleAddComment={handleAddComment} errors={errors} />
+                    <AddComment post={post} handleAddComment={handleAddComment} />
                     <br/>
-                    {post.comments ? <Comments errors={errors} post={post} handleUpdatedComments={handleUpdatedComments} handleDeleteComment={handleDeleteComment} handleAddComment={handleAddComment}/> : null}
+                    {post.comments ? <Comments post={post} handleUpdatedComments={handleUpdatedComments} handleDeleteComment={handleDeleteComment} handleAddComment={handleAddComment}/> : null}
                     </article>
                  </article>
             )})

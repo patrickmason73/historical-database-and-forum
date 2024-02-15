@@ -55,7 +55,7 @@ function Login() {
             </label>
             <br />
 
-            <button type="submit" style={{ width: "100px", padding: "5px", margin: "10px 6px 6px", background: "blue", color: "white", display: "block", marginBottom: '30px', cursor: 'pointer'}}>Login</button>
+            <button type="submit" style={{ width: "100px", fontSize: '100%', padding: "5px", margin: "20px 100px 6px", background: "blue", color: "white", display: "block", marginBottom: '30px', cursor: 'pointer'}}>Login</button>
             <ul>{errors.map((err) => (
                 <li key={err}>{err}</li>
             ))}</ul>

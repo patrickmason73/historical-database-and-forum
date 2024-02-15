@@ -2,15 +2,15 @@ import React, { useState } from "react";
 
 
 
-function AddPost({ addPost, errors }) {
+function AddPost({ addPost }) {
     const [title, setTitle] = useState("")
     const [content, setContent] = useState("")
     const [imgURL, setImgURL] = useState("")
-    
+    const [errors, setErrors] = useState([])
 
     function handleSubmit(e) {
         e.preventDefault();
-        addPost(title, content, imgURL)
+        addPost(title, content, imgURL, setErrors)
     }
 
 

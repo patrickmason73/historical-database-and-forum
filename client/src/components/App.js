@@ -16,7 +16,6 @@ function App() {
   const navigate = useNavigate();
   
   const [posts, setPosts] = useState([])
-  const [errors, setErrors] = useState([])
 
 
   useEffect(() => {
@@ -36,7 +35,7 @@ function App() {
     })
   }
 
-  function addPost(title, content, imgURL) {
+  function addPost(title, content, imgURL, setErrors) {
     fetch("/posts", {
       method: "POST",
       headers: {
@@ -62,7 +61,7 @@ function App() {
   })
   }
 
-  function handleSignUp(username, password, passwordConfirmation, displayName, imgURL, bio) {
+  function handleSignUp(username, password, passwordConfirmation, displayName, imgURL, bio, setErrors) {
     
     fetch("/signup", {
         method: "POST",
@@ -90,7 +89,7 @@ function App() {
     })
   }
 
-  function addComment(newComment, postId, parentId) { 
+  function addComment(newComment, postId, parentId, setErrors) { 
     const postToUpdate = posts.find((post) => post.id === postId)
     fetch(`/comments`, {
       method: "POST",
@@ -118,7 +117,6 @@ function App() {
                     users: [...postToUpdate.users, currentUser],
                   };
                 }
-                // If the new comment is a reply, find its parent comment and append it to the replies array
                 return {
                   ...postToUpdate,
                   comments: postToUpdate.comments.map((comment) => {
@@ -128,6 +126,20 @@ function App() {
                         replies: [...comment.replies, data],
                       };
                     }
+                    if (comment.replies && comment.replies.length > 0) {
+                      return {
+                          ...comment,
+                          replies: comment.replies.map((reply) => {
+                              if (comment.id === reply.parent_comment_id) {
+                                  return {
+                                      ...reply,
+                                      replies:(reply.replies || []).concat(data),
+                                  };
+                              }
+                              return reply;
+                          }),
+                      };
+                  }
                     return comment;
                   }),
                 };
@@ -136,6 +148,7 @@ function App() {
             });
             setPosts(updatedPosts);
             setErrors([]);
+            // setReplying(false)
           });
         } else {
           res.json().then((err) => setErrors(err.errors));
@@ -143,7 +156,7 @@ function App() {
       });
     }
 
-  function updatedComments(newComment, postId, comment) {
+  function updatedComments(newComment, postId, comment, setErrors) {
     const postToUpdate = posts.find((post) => post.id === postId)
     fetch(`/comments/${comment.id}`, {
       method: "PATCH", 
@@ -154,18 +167,18 @@ function App() {
           content: newComment,
       }),
   })
-  .then((r) => r.json())
-  .then((data) => {
+  // .then((r) => r.json())
+  .then((res) => {
+    if (res.ok) {
+      res.json().then((data) => {
     const updatedPosts = posts.map((post) => {
       if (post === postToUpdate) {
         return {
           ...postToUpdate,
           comments: post.comments.map((c) => {
-            // If the updated comment is a parent comment or a reply, replace it with the updated data
             if (c.id === data.id) {
               return data;
             } else if (c.replies && c.replies.length > 0) {
-              // If the comment has replies, check if the updated comment is among its replies
               return {
                 ...c,
                 replies: c.replies.map((reply) => {
@@ -183,10 +196,16 @@ function App() {
       return post;
     });
     setPosts(updatedPosts);
+    setErrors([]);
+  })
+  }
+  else {
+    res.json().then((err) => setErrors(err.errors));
+  }
   });
 }
 
-  function filterComment(commentDelete, postId) {
+  function filterComment(commentDelete, postId, setErrors) {
     const postToUpdate = posts.find((post) => post.id === postId)
     fetch(`/comments/${commentDelete.id}`, {
       method: "DELETE",
@@ -205,7 +224,6 @@ function App() {
             }
             return true;
           });
-
           // Filter out the deleted comment's user from the users array
           const updatedUsers = post.users.filter((user) => {
             const hasComments = updatedComments.some(
@@ -227,6 +245,9 @@ function App() {
     } else {
       res.json().then((err) => setErrors(err.errors));
     }
+  }).catch(error => {
+    console.error('Error deleting comment:', error);
+    // Handle error (e.g., show error message to user)
   });
 }
 
@@ -234,12 +255,12 @@ function App() {
   return (
     <div style={{paddingLeft: '200px', position: 'absolute'}}>
        <strong style={{fontSize:"150%", marginLeft: '20px'}}>{currentUser !== null && `Welcome back, ${currentUser.display_name}`}</strong>
-       {/* <button onClick={console.log(posts)}>console</button> */}
+       <button onClick={() => console.log(posts)}>console</button>
       <Navbar logout={logout}/>
      <Routes>
       <Route path="/*" element={
         <>
-      <Header posts={posts} filterComment={filterComment} updatedComments={updatedComments} addComment={addComment} errors={errors} setErrors={setErrors}/>
+      <Header posts={posts} filterComment={filterComment} updatedComments={updatedComments} addComment={addComment} />
       </>
       }>
       </Route> 
@@ -250,10 +271,10 @@ function App() {
         }>
       </Route>
 
-      <Route path="/signup" element={<Signup errors={errors} handleSignUp={handleSignUp}/>}>
+      <Route path="/signup" element={<Signup handleSignUp={handleSignUp}/>}>
       </Route>
 
-      <Route path="/posts/new" element={(currentUser ? <AddPost addPost={addPost} errors={errors} /> : <h1 style={{marginLeft: '20px'}}>Log In Or Sign Up To Create Posts!</h1>)}>
+      <Route path="/posts/new" element={(currentUser ? <AddPost addPost={addPost} /> : <h1 style={{marginLeft: '20px'}}>Log In Or Sign Up To Create Posts!</h1>)}>
       </Route>
 
      </Routes>

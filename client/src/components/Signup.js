@@ -2,9 +2,9 @@ import React, { useState } from "react"
 
 
 
-function Signup ({ errors, handleSignUp }) {
+function Signup ({ handleSignUp }) {
 
-
+    const [errors, setErrors] = useState([])
     const [username, setUsername] = useState("")
     const [password, setPassword] = useState("")
     const [passwordConfirmation, setPasswordConfirmation] = useState("")
@@ -15,7 +15,7 @@ function Signup ({ errors, handleSignUp }) {
 
     function handleSubmit(e) {
         e.preventDefault()
-        handleSignUp(username, password, passwordConfirmation, displayName, imgURL, bio)
+        handleSignUp(username, password, passwordConfirmation, displayName, imgURL, bio, setErrors)
     }
 
     return (

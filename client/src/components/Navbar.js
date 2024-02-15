@@ -15,7 +15,7 @@ const linkStyles = {
     borderRadius: '10px',
     textAlign: 'center',
     fontWeight: 'bold',
-    fontSize: '120%'
+    fontSize: '130%'
   };
 
   const navStyle = {
