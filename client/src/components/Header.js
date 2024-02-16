@@ -6,7 +6,7 @@ const headerStyle = {
     display: "grid",
     placeItems: "center",
     fontSize: "200%",
-    backgroundColor: 'lightgray',
+    backgroundColor: 'lightblue',
     marginTop: '2px',
     marginBottom: '30px',
     // borderStyle: 'solid',
@@ -93,7 +93,7 @@ function Header({ posts, filterComment, updatedComments, addComment }) {
     return (
         <>
         <p style={headerStyle}><strong>HISTORICAL EVENTS AND PEOPLE</strong></p>
-        <p style={headerStyle}><strong>Public Database and Forum</strong></p>
+        <p style={headerStyle}><strong>-Public Database and Forum-</strong></p>
 
         {/* <p style={secondStyle}>This Website Is A Place Where Anyone Can Post About Any Person Or Event From History That They Found Interesting Or Significant</p> */}
         {/* <p style={secondStyle}>Login To Get Create Posts Or Comment! If You Don't Have An Account, Sign Up!</p>
