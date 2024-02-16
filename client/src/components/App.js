@@ -255,7 +255,7 @@ function App() {
   return (
     <div style={{paddingLeft: '200px', position: 'absolute'}}>
        <strong style={{fontSize:"150%", marginLeft: '20px'}}>{currentUser !== null && `Welcome back, ${currentUser.display_name}`}</strong>
-       <button onClick={() => console.log(posts)}>console</button>
+       {/* <button onClick={() => console.log(posts)}>console</button> */}
       <Navbar logout={logout}/>
      <Routes>
       <Route path="/*" element={
